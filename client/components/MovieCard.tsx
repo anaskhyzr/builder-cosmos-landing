@@ -61,7 +61,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
 
   return (
     <div
-      className={`movie-card ${sizeClasses[size]} group cursor-pointer`}
+      className={`movie-card ${sizeClasses[size]} group`}
       onClick={handleClick}
     >
       {/* Movie Poster */}
