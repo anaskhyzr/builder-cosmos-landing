@@ -89,7 +89,7 @@
 
   /* Movie card styles */
   .movie-card {
-    @apply glass rounded-xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+    @apply glass rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl;
   }
 
   .movie-card-image {
