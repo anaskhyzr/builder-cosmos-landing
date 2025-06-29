@@ -38,16 +38,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
   ];
 
   return (
-    <div className="w-16 h-screen bg-background-secondary/80 backdrop-blur-xl border-r border-glass-border/30 flex flex-col items-center py-6">
-      {/* Logo */}
-      <div className="mb-8">
-        <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-hover rounded-xl flex items-center justify-center group cursor-pointer">
-          <Film className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200" />
-        </div>
-      </div>
-
+    <div className="w-16 h-screen bg-glass/20 backdrop-blur-xl flex flex-col items-center py-8">
       {/* Main Navigation */}
-      <nav className="flex-1 flex flex-col items-center space-y-4">
+      <nav className="flex flex-col items-center space-y-6">
         {navigationItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentPage === item.id;
@@ -56,31 +49,29 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
             <button
               key={item.id}
               onClick={() => onPageChange(item.id)}
-              className={`group relative w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 ${
+              className={`group relative w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
                 isActive
-                  ? "bg-primary text-white shadow-lg shadow-primary/25"
-                  : "text-foreground/60 hover:text-foreground hover:bg-glass/50"
+                  ? "bg-white/20 text-white"
+                  : "text-white/50 hover:text-white/80 hover:bg-white/10"
               }`}
               title={item.tooltip}
             >
-              <Icon
-                className={`w-5 h-5 transition-transform duration-200 ${
-                  isActive ? "scale-110" : "group-hover:scale-110"
-                }`}
-              />
+              <Icon className="w-5 h-5" />
 
-              {/* Tooltip */}
-              <div className="absolute left-16 px-3 py-2 bg-background-tertiary/90 backdrop-blur-sm text-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
-                {item.tooltip}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-2 h-2 bg-background-tertiary/90 rotate-45" />
-              </div>
+              {/* Minimal active indicator */}
+              {isActive && (
+                <div className="absolute -right-3 w-1 h-6 bg-white rounded-full" />
+              )}
             </button>
           );
         })}
       </nav>
 
+      {/* Spacer */}
+      <div className="flex-1" />
+
       {/* Bottom Navigation */}
-      <div className="flex flex-col items-center space-y-4">
+      <div className="flex flex-col items-center space-y-6">
         {bottomItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentPage === item.id;
@@ -89,49 +80,42 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
             <button
               key={item.id}
               onClick={() => onPageChange(item.id)}
-              className={`group relative w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 ${
+              className={`group relative w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
                 isActive
-                  ? "bg-primary text-white shadow-lg shadow-primary/25"
-                  : "text-foreground/60 hover:text-foreground hover:bg-glass/50"
+                  ? "bg-white/20 text-white"
+                  : "text-white/50 hover:text-white/80 hover:bg-white/10"
               }`}
               title={item.tooltip}
             >
-              <Icon
-                className={`w-5 h-5 transition-transform duration-200 ${
-                  isActive ? "scale-110" : "group-hover:scale-110"
-                }`}
-              />
+              <Icon className="w-5 h-5" />
 
-              {/* Tooltip */}
-              <div className="absolute left-16 px-3 py-2 bg-background-tertiary/90 backdrop-blur-sm text-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
-                {item.tooltip}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-2 h-2 bg-background-tertiary/90 rotate-45" />
-              </div>
+              {/* Minimal active indicator */}
+              {isActive && (
+                <div className="absolute -right-3 w-1 h-6 bg-white rounded-full" />
+              )}
             </button>
           );
         })}
 
         {/* User Avatar */}
-        <div className="mt-4 pt-4 border-t border-glass-border/30">
-          <button
-            onClick={() => onPageChange("profile")}
-            className="group relative w-12 h-12 rounded-xl overflow-hidden transition-all duration-200 hover:scale-105"
-            title={state.user?.name}
-          >
-            <img
-              src={state.user?.avatar}
-              alt={state.user?.name}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-
-            {/* Tooltip */}
-            <div className="absolute left-16 px-3 py-2 bg-background-tertiary/90 backdrop-blur-sm text-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
-              {state.user?.name}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-2 h-2 bg-background-tertiary/90 rotate-45" />
-            </div>
-          </button>
-        </div>
+        <button
+          onClick={() => onPageChange("profile")}
+          className={`group relative w-10 h-10 rounded-lg overflow-hidden transition-all duration-300 ${
+            currentPage === "profile"
+              ? "ring-2 ring-white/50"
+              : "hover:ring-2 hover:ring-white/30"
+          }`}
+          title={state.user?.name}
+        >
+          <img
+            src={state.user?.avatar}
+            alt={state.user?.name}
+            className="w-full h-full object-cover"
+          />
+          {currentPage === "profile" && (
+            <div className="absolute -right-3 w-1 h-6 bg-white rounded-full" />
+          )}
+        </button>
       </div>
     </div>
   );
