@@ -23,16 +23,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
 
   const navigationItems = [
     { id: "home", icon: Home, tooltip: "Home" },
-    { id: "search", icon: Search, tooltip: "Search" },
-    { id: "movies", icon: Film, tooltip: "Movies" },
-    { id: "tv", icon: Tv, tooltip: "TV Series" },
-    { id: "animation", icon: Palette, tooltip: "Animation" },
-    { id: "military", icon: Shield, tooltip: "Military" },
     { id: "watchlist", icon: Heart, tooltip: "Watchlist" },
     { id: "downloads", icon: Download, tooltip: "Downloads" },
-  ];
-
-  const bottomItems = [
     { id: "profile", icon: User, tooltip: "Profile" },
     { id: "settings", icon: Settings, tooltip: "Settings" },
   ];
