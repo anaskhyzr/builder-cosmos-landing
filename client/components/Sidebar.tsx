@@ -6,14 +6,12 @@ import {
   Tv,
   Palette,
   Shield,
-  MoreHorizontal,
-  Play,
+  Heart,
   User,
   Settings,
-  LogOut,
+  Download,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
-import { getContinueWatching } from "../lib/movie-data";
 
 interface SidebarProps {
   currentPage: string;
@@ -22,44 +20,34 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
   const { state } = useAppContext();
-  const continueWatching = getContinueWatching();
 
   const navigationItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "search", label: "Search", icon: Search },
-    { id: "movies", label: "Movies", icon: Film },
-    { id: "tv", label: "TV Series", icon: Tv },
-    { id: "animation", label: "Animation", icon: Palette },
-    { id: "military", label: "Military", icon: Shield },
-    { id: "more", label: "More", icon: MoreHorizontal },
+    { id: "home", icon: Home, tooltip: "Home" },
+    { id: "search", icon: Search, tooltip: "Search" },
+    { id: "movies", icon: Film, tooltip: "Movies" },
+    { id: "tv", icon: Tv, tooltip: "TV Series" },
+    { id: "animation", icon: Palette, tooltip: "Animation" },
+    { id: "military", icon: Shield, tooltip: "Military" },
+    { id: "watchlist", icon: Heart, tooltip: "Watchlist" },
+    { id: "downloads", icon: Download, tooltip: "Downloads" },
   ];
 
-  const userItems = [
-    { id: "profile", label: "Profile", icon: User },
-    { id: "settings", label: "Settings", icon: Settings },
+  const bottomItems = [
+    { id: "profile", icon: User, tooltip: "Profile" },
+    { id: "settings", icon: Settings, tooltip: "Settings" },
   ];
 
   return (
-    <div className="w-80 h-screen bg-sidebar glass border-r border-sidebar-border flex flex-col">
+    <div className="w-16 h-screen bg-background-secondary/80 backdrop-blur-xl border-r border-glass-border/30 flex flex-col items-center py-6">
       {/* Logo */}
-      <div className="p-6 border-b border-sidebar-border/50">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-hover rounded-lg flex items-center justify-center">
-            <Film className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-sidebar-foreground">
-              CineTracker
-            </h1>
-            <p className="text-sm text-sidebar-foreground/60">
-              AI Movie Tracker
-            </p>
-          </div>
+      <div className="mb-8">
+        <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-hover rounded-xl flex items-center justify-center group cursor-pointer">
+          <Film className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200" />
         </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2 custom-scrollbar overflow-y-auto">
+      {/* Main Navigation */}
+      <nav className="flex-1 flex flex-col items-center space-y-4">
         {navigationItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentPage === item.id;
@@ -68,100 +56,81 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
             <button
               key={item.id}
               onClick={() => onPageChange(item.id)}
-              className={`sidebar-item w-full ${isActive ? "active" : ""}`}
+              className={`group relative w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 ${
+                isActive
+                  ? "bg-primary text-white shadow-lg shadow-primary/25"
+                  : "text-foreground/60 hover:text-foreground hover:bg-glass/50"
+              }`}
+              title={item.tooltip}
             >
-              <Icon className="w-5 h-5" />
-              <span className="font-medium">{item.label}</span>
+              <Icon
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  isActive ? "scale-110" : "group-hover:scale-110"
+                }`}
+              />
+
+              {/* Tooltip */}
+              <div className="absolute left-16 px-3 py-2 bg-background-tertiary/90 backdrop-blur-sm text-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                {item.tooltip}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-2 h-2 bg-background-tertiary/90 rotate-45" />
+              </div>
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Bottom Navigation */}
+      <div className="flex flex-col items-center space-y-4">
+        {bottomItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = currentPage === item.id;
+
+          return (
+            <button
+              key={item.id}
+              onClick={() => onPageChange(item.id)}
+              className={`group relative w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 ${
+                isActive
+                  ? "bg-primary text-white shadow-lg shadow-primary/25"
+                  : "text-foreground/60 hover:text-foreground hover:bg-glass/50"
+              }`}
+              title={item.tooltip}
+            >
+              <Icon
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  isActive ? "scale-110" : "group-hover:scale-110"
+                }`}
+              />
+
+              {/* Tooltip */}
+              <div className="absolute left-16 px-3 py-2 bg-background-tertiary/90 backdrop-blur-sm text-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                {item.tooltip}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-2 h-2 bg-background-tertiary/90 rotate-45" />
+              </div>
             </button>
           );
         })}
 
-        {/* Continue Watching Section */}
-        {continueWatching.length > 0 && (
-          <div className="pt-6">
-            <h3 className="text-sm font-semibold text-sidebar-foreground/80 mb-3 px-4">
-              Continue Watching
-            </h3>
-            <div className="space-y-3">
-              {continueWatching.slice(0, 3).map((movie) => (
-                <div
-                  key={movie.id}
-                  className="glass-card p-3 cursor-pointer hover:bg-sidebar-accent/30 transition-all"
-                >
-                  <div className="flex gap-3">
-                    <div className="relative">
-                      <img
-                        src={movie.poster}
-                        alt={movie.title}
-                        className="w-16 h-20 object-cover rounded-lg"
-                      />
-                      <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <Play className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-medium text-sidebar-foreground truncate">
-                        {movie.title}
-                      </h4>
-                      <p className="text-xs text-sidebar-foreground/60 mb-2">
-                        {movie.category.toUpperCase()}
-                      </p>
-                      {movie.progress && (
-                        <div className="w-full bg-sidebar-border/50 rounded-full h-1">
-                          <div
-                            className="bg-primary h-1 rounded-full transition-all"
-                            style={{ width: `${movie.progress}%` }}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
+        {/* User Avatar */}
+        <div className="mt-4 pt-4 border-t border-glass-border/30">
+          <button
+            onClick={() => onPageChange("profile")}
+            className="group relative w-12 h-12 rounded-xl overflow-hidden transition-all duration-200 hover:scale-105"
+            title={state.user?.name}
+          >
+            <img
+              src={state.user?.avatar}
+              alt={state.user?.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+
+            {/* Tooltip */}
+            <div className="absolute left-16 px-3 py-2 bg-background-tertiary/90 backdrop-blur-sm text-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+              {state.user?.name}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-2 h-2 bg-background-tertiary/90 rotate-45" />
             </div>
-          </div>
-        )}
-      </nav>
-
-      {/* User Profile */}
-      <div className="p-4 border-t border-sidebar-border/50">
-        <div className="space-y-2">
-          {userItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = currentPage === item.id;
-
-            return (
-              <button
-                key={item.id}
-                onClick={() => onPageChange(item.id)}
-                className={`sidebar-item w-full ${isActive ? "active" : ""}`}
-              >
-                <Icon className="w-5 h-5" />
-                <span className="font-medium">{item.label}</span>
-              </button>
-            );
-          })}
-
-          <div className="glass-card p-3 mt-4">
-            <div className="flex items-center gap-3">
-              <img
-                src={state.user?.avatar}
-                alt={state.user?.name}
-                className="w-10 h-10 object-cover rounded-lg"
-              />
-              <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-sidebar-foreground truncate">
-                  {state.user?.name}
-                </h4>
-                <p className="text-xs text-sidebar-foreground/60">
-                  @{state.user?.username}
-                </p>
-              </div>
-              <button className="p-1 hover:bg-sidebar-accent/30 rounded-lg transition-colors">
-                <LogOut className="w-4 h-4 text-sidebar-foreground/60" />
-              </button>
-            </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
