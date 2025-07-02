@@ -73,6 +73,8 @@ const AppContent: React.FC = () => {
         return <SearchPage />;
       case "profile":
         return <ProfilePage />;
+      case "social":
+        return <SocialPage />;
       case "settings":
         return <SettingsPage />;
       case "movies":
