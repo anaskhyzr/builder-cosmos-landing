@@ -85,11 +85,14 @@ const AISuggestionsPage: React.FC = () => {
 
   const reasonTypes = [
     { id: "all", label: "All Suggestions", icon: Sparkles },
+    { id: "mood", label: "Mood-Based", icon: Heart },
+    { id: "time", label: "Time-Perfect", icon: Clock },
+    { id: "weather", label: "Weather-Matched", icon: Cloud },
+    { id: "seasonal", label: "Seasonal", icon: Calendar },
     { id: "genre", label: "Genre Match", icon: Target },
     { id: "sequel", label: "Sequels", icon: RefreshCw },
-    { id: "similar", label: "Similar", icon: Brain },
     { id: "collaborative", label: "Community", icon: Users },
-    { id: "trending", label: "Trending", icon: TrendingUp },
+    { id: "trending", label: "Platform Available", icon: TrendingUp },
   ];
 
   return (
