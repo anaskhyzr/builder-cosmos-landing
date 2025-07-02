@@ -515,7 +515,16 @@ const EnhancedSocialPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => setSelectedChat(`chat-${friend.id}`)}
+                    onClick={() => {
+                      const existingConv = conversations.find(
+                        (c) => c.participantId === friend.id,
+                      );
+                      if (existingConv) {
+                        setSelectedChat(existingConv.id);
+                      } else {
+                        setSelectedChat(`chat-${friend.id}`);
+                      }
+                    }}
                     className="glass-button p-2 rounded-lg"
                   >
                     <MessageCircle className="w-4 h-4" />
