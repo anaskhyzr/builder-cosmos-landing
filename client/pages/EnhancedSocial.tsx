@@ -79,8 +79,11 @@ interface UserList {
 
 const EnhancedSocialPage: React.FC = () => {
   const { state } = useAppContext();
-  const [activeTab, setActiveTab] = useState("watch-parties");
+  const [activeTab, setActiveTab] = useState("friends");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedChat, setSelectedChat] = useState<string | null>(null);
+  const [newMessage, setNewMessage] = useState("");
+  const [showAddFriend, setShowAddFriend] = useState(false);
 
   // Mock data
   const watchParties: WatchParty[] = [
