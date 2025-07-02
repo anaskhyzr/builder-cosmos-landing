@@ -29,18 +29,13 @@ import {
   detectUserContext,
 } from "../lib/enhanced-ai";
 
-interface Suggestion {
-  movie: Movie;
-  reason: string;
-  confidence: number;
-  type: "similar" | "sequel" | "genre" | "collaborative" | "trending";
-}
-
 const AISuggestionsPage: React.FC = () => {
   const { state } = useAppContext();
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [suggestions, setSuggestions] = useState<EnhancedSuggestion[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [selectedReason, setSelectedReason] = useState("all");
+  const [userContext, setUserContext] = useState<UserContext | null>(null);
+  const [aiEngine, setAiEngine] = useState<EnhancedAIEngine | null>(null);
 
   // AI Suggestion Algorithm
   const generateSuggestions = (): Suggestion[] => {
