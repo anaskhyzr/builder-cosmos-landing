@@ -1161,7 +1161,7 @@ const SettingsPage: React.FC = () => {
                   Settings
                 </h1>
                 <p className="text-muted-foreground">
-                  Customize your CineTracker experience
+                  Customize your movie tracking and social experience
                 </p>
               </div>
             </div>
