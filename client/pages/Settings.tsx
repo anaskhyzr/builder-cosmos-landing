@@ -139,7 +139,6 @@ const SettingsPage: React.FC = () => {
     { id: "notifications", label: "Notifications", icon: Bell },
     { id: "privacy", label: "Privacy", icon: Shield },
     { id: "display", label: "Display", icon: Palette },
-    { id: "playback", label: "Playback", icon: Film },
     { id: "help", label: "Help", icon: HelpCircle },
   ];
 
