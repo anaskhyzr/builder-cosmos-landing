@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Home,
-  Search,
-  Film,
-  Tv,
-  Palette,
-  Shield,
-  Heart,
-  User,
-  Settings,
-  Users,
-} from "lucide-react";
+import { Home, Heart, Users, User, Settings, Sparkles } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 
 interface SidebarProps {
