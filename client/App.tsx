@@ -68,13 +68,22 @@ const AppContent: React.FC = () => {
       case "search":
         return <SearchPage />;
       case "profile":
-        return <ProfilePage />;
+        return (
+          <div className="space-y-6">
+            <ProfilePage />
+            <div className="px-6">
+              <GamificationDashboard />
+            </div>
+          </div>
+        );
       case "social":
-        return <SocialPage />;
+        return <EnhancedSocialPage />;
       case "watchlist":
         return <WatchlistPage />;
       case "ai-suggestions":
         return <AISuggestionsPage />;
+      case "analytics":
+        return <AnalyticsPage />;
       case "settings":
         return <SettingsPage />;
       case "movies":
