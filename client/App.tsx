@@ -24,17 +24,6 @@ const SearchPage = () => (
   </div>
 );
 
-const SettingsPage = () => (
-  <div className="flex-1 bg-background min-h-screen p-6">
-    <div className="glass-card p-12 text-center">
-      <h1 className="text-3xl font-bold text-foreground mb-4">Settings</h1>
-      <p className="text-muted-foreground">
-        User settings and preferences coming soon...
-      </p>
-    </div>
-  </div>
-);
-
 const CategoryPage = ({ category }: { category: string }) => (
   <div className="flex-1 bg-background min-h-screen p-6">
     <div className="glass-card p-12 text-center">
