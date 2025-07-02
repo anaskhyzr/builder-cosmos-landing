@@ -1,11 +1,12 @@
 import React from "react";
 import {
   Play,
-  Download,
   MoreHorizontal,
   Star,
   Plus,
   Check,
+  Heart,
+  Share2,
 } from "lucide-react";
 import { Movie } from "../lib/movie-data";
 import { useAppContext, useToast } from "../lib/app-context";
