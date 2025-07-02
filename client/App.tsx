@@ -70,6 +70,8 @@ const AppContent: React.FC = () => {
         return <SocialPage />;
       case "watchlist":
         return <WatchlistPage />;
+      case "ai-suggestions":
+        return <AISuggestionsPage />;
       case "settings":
         return <SettingsPage />;
       case "movies":
