@@ -81,14 +81,6 @@ interface UserPreferences {
     animationsEnabled: boolean;
     highContrast: boolean;
   };
-  playbackSettings: {
-    autoplay: boolean;
-    qualityPreference: "auto" | "high" | "medium" | "low";
-    subtitlesEnabled: boolean;
-    subtitleLanguage: string;
-    soundEnabled: boolean;
-    volume: number;
-  };
 }
 
 const SettingsPage: React.FC = () => {
