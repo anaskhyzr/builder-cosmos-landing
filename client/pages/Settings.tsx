@@ -269,7 +269,10 @@ const SettingsPage: React.FC = () => {
               </label>
               <input
                 type="text"
-                value={state.user?.name || ""}
+                value={profileForm.name}
+                onChange={(e) =>
+                  setProfileForm({ ...profileForm, name: e.target.value })
+                }
                 className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary"
               />
             </div>
@@ -279,7 +282,10 @@ const SettingsPage: React.FC = () => {
               </label>
               <input
                 type="text"
-                value={state.user?.username || ""}
+                value={profileForm.username}
+                onChange={(e) =>
+                  setProfileForm({ ...profileForm, username: e.target.value })
+                }
                 className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary"
               />
             </div>
