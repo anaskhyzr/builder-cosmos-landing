@@ -134,7 +134,7 @@ const AISuggestionsPage: React.FC = () => {
           </div>
 
           {/* Algorithm Insights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="glass bg-primary/10 p-4 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
                 <Lightbulb className="w-5 h-5 text-primary" />
@@ -173,6 +173,20 @@ const AISuggestionsPage: React.FC = () => {
                 Based on users with 85% similar taste
               </p>
             </div>
+            {userContext && (
+              <div className="glass bg-orange-500/10 p-4 rounded-xl">
+                <div className="flex items-center gap-3 mb-2">
+                  <Zap className="w-5 h-5 text-orange-500" />
+                  <span className="font-medium text-foreground">
+                    Current Context
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {userContext.mood ? `${userContext.mood} mood, ` : ""}
+                  {userContext.weather} weather
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Filter Tabs */}
