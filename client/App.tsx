@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/Index";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
+import SocialPage from "./pages/Social";
 import NotFound from "./pages/NotFound";
 
 // Placeholder components for other pages
