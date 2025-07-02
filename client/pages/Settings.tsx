@@ -382,7 +382,7 @@ const SettingsPage: React.FC = () => {
               <div>
                 <h4 className="font-medium text-foreground">Export Data</h4>
                 <p className="text-sm text-muted-foreground">
-                  Download all your data
+                  Export your watchlist and ratings
                 </p>
               </div>
               <Download className="w-4 h-4 text-muted-foreground" />
