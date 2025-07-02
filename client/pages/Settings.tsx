@@ -130,14 +130,6 @@ const SettingsPage: React.FC = () => {
       animationsEnabled: true,
       highContrast: false,
     },
-    playbackSettings: {
-      autoplay: true,
-      qualityPreference: "high",
-      subtitlesEnabled: false,
-      subtitleLanguage: "en",
-      soundEnabled: true,
-      volume: 80,
-    },
   });
 
   const tabs = [
