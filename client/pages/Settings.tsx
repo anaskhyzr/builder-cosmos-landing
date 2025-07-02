@@ -1211,7 +1211,6 @@ const SettingsPage: React.FC = () => {
           {activeTab === "notifications" && renderNotificationsTab()}
           {activeTab === "privacy" && renderPrivacyTab()}
           {activeTab === "display" && renderDisplayTab()}
-          {activeTab === "playback" && renderPlaybackTab()}
           {activeTab === "help" && renderHelpTab()}
         </div>
       </div>
