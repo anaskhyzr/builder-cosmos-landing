@@ -9,7 +9,7 @@ import {
   Heart,
   User,
   Settings,
-  Download,
+  Users,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 
