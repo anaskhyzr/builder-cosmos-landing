@@ -409,6 +409,344 @@ const EnhancedSocialPage: React.FC = () => {
     { id: "user-lists", label: "Movie Lists", icon: Star },
   ];
 
+  const handleSendMessage = () => {
+    if (!newMessage.trim() || !selectedChat) return;
+
+    const newMsg: ChatMessage = {
+      id: `msg-${Date.now()}`,
+      senderId: "me",
+      senderName: "You",
+      senderAvatar: state.user?.avatar || "",
+      message: newMessage,
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      type: "text",
+    };
+
+    setConversations((prev) =>
+      prev.map((conv) =>
+        conv.id === selectedChat
+          ? {
+              ...conv,
+              messages: [...conv.messages, newMsg],
+              lastMessage: newMessage,
+              lastMessageTime: "now",
+            }
+          : conv,
+      ),
+    );
+
+    setNewMessage("");
+  };
+
+  const handleAddFriend = (friendId: string) => {
+    console.log("Adding friend:", friendId);
+    setShowAddFriend(false);
+  };
+
+  const renderFriendsTab = () => (
+    <div className="space-y-6">
+      {/* Add Friend Section */}
+      <div className="glass-card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-xl font-semibold text-foreground">My Friends</h3>
+          <button
+            onClick={() => setShowAddFriend(true)}
+            className="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all"
+          >
+            <UserPlus className="w-4 h-4" />
+            Add Friend
+          </button>
+        </div>
+
+        {/* Search Friends */}
+        <div className="relative mb-6">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search friends..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 bg-input border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
+          />
+        </div>
+
+        {/* Friends List */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {friends.map((friend) => (
+            <div
+              key={friend.id}
+              className="glass-card p-4 hover:bg-card-hover transition-all"
+            >
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <img
+                    src={friend.avatar}
+                    alt={friend.name}
+                    className="w-12 h-12 object-cover rounded-full"
+                  />
+                  <div
+                    className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-background ${
+                      friend.status === "online"
+                        ? "bg-green-500"
+                        : friend.status === "watching"
+                          ? "bg-blue-500"
+                          : "bg-gray-500"
+                    }`}
+                  />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground">
+                    {friend.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    @{friend.username}
+                  </p>
+                  <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
+                    <span>{friend.mutualFriends} mutual friends</span>
+                    <span>•</span>
+                    <span>{friend.commonMovies} common movies</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setSelectedChat(`chat-${friend.id}`)}
+                    className="glass-button p-2 rounded-lg"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                  </button>
+                  <button className="glass-button p-2 rounded-lg">
+                    <MoreHorizontal className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Suggested Friends */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-4">
+          People You May Know
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {suggestedFriends.map((friend) => (
+            <div key={friend.id} className="glass bg-accent/30 p-4 rounded-xl">
+              <div className="flex items-center gap-4">
+                <img
+                  src={friend.avatar}
+                  alt={friend.name}
+                  className="w-12 h-12 object-cover rounded-full"
+                />
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground">
+                    {friend.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    @{friend.username}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {friend.mutualFriends} mutual friends
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleAddFriend(friend.id)}
+                  className="bg-primary hover:bg-primary-hover text-white px-3 py-1 rounded-lg text-sm transition-all"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderChatsTab = () => (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
+      {/* Chat List */}
+      <div className="lg:col-span-1">
+        <div className="glass-card h-full flex flex-col">
+          <div className="p-4 border-b border-border">
+            <h3 className="text-lg font-semibold text-foreground mb-3">
+              Messages
+            </h3>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search conversations..."
+                className="w-full pl-10 pr-4 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
+              />
+            </div>
+          </div>
+          <div className="flex-1 overflow-y-auto custom-scrollbar">
+            {conversations.map((conv) => (
+              <button
+                key={conv.id}
+                onClick={() => setSelectedChat(conv.id)}
+                className={`w-full p-4 flex items-center gap-3 hover:bg-accent/30 transition-all text-left ${
+                  selectedChat === conv.id
+                    ? "bg-primary/10 border-r-2 border-primary"
+                    : ""
+                }`}
+              >
+                <div className="relative">
+                  <img
+                    src={conv.participantAvatar}
+                    alt={conv.participantName}
+                    className="w-12 h-12 object-cover rounded-full"
+                  />
+                  {conv.isOnline && (
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-semibold text-foreground truncate">
+                      {conv.participantName}
+                    </h4>
+                    <span className="text-xs text-muted-foreground">
+                      {conv.lastMessageTime}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground truncate">
+                    {conv.lastMessage}
+                  </p>
+                </div>
+                {conv.unreadCount > 0 && (
+                  <div className="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center text-xs">
+                    {conv.unreadCount}
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Chat Interface */}
+      <div className="lg:col-span-2">
+        <div className="glass-card h-full flex flex-col">
+          {selectedChat ? (
+            <>
+              {/* Chat Header */}
+              <div className="p-4 border-b border-border">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={
+                      conversations.find((c) => c.id === selectedChat)
+                        ?.participantAvatar
+                    }
+                    alt=""
+                    className="w-10 h-10 object-cover rounded-full"
+                  />
+                  <div>
+                    <h3 className="font-semibold text-foreground">
+                      {
+                        conversations.find((c) => c.id === selectedChat)
+                          ?.participantName
+                      }
+                    </h3>
+                    <p className="text-sm text-green-500">Online</p>
+                  </div>
+                  <div className="ml-auto flex items-center gap-2">
+                    <button className="glass-button p-2 rounded-lg">
+                      <Phone className="w-4 h-4" />
+                    </button>
+                    <button className="glass-button p-2 rounded-lg">
+                      <Video className="w-4 h-4" />
+                    </button>
+                    <button className="glass-button p-2 rounded-lg">
+                      <MoreHorizontal className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Messages */}
+              <div className="flex-1 p-4 overflow-y-auto custom-scrollbar space-y-4">
+                {conversations
+                  .find((c) => c.id === selectedChat)
+                  ?.messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex gap-3 ${message.senderId === "me" ? "flex-row-reverse" : ""}`}
+                    >
+                      <img
+                        src={message.senderAvatar}
+                        alt=""
+                        className="w-8 h-8 object-cover rounded-full flex-shrink-0"
+                      />
+                      <div
+                        className={`max-w-xs lg:max-w-md ${message.senderId === "me" ? "text-right" : ""}`}
+                      >
+                        <div
+                          className={`p-3 rounded-xl ${
+                            message.senderId === "me"
+                              ? "bg-primary text-white"
+                              : "bg-accent text-foreground"
+                          }`}
+                        >
+                          <p>{message.message}</p>
+                        </div>
+                        <span className="text-xs text-muted-foreground mt-1 block">
+                          {message.timestamp}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Message Input */}
+              <div className="p-4 border-t border-border">
+                <div className="flex items-center gap-3">
+                  <button className="glass-button p-2 rounded-lg">
+                    <Plus className="w-4 h-4" />
+                  </button>
+                  <div className="flex-1 relative">
+                    <input
+                      type="text"
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSendMessage()
+                      }
+                      placeholder="Type a message..."
+                      className="w-full px-4 py-2 bg-input border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
+                    />
+                  </div>
+                  <button
+                    onClick={handleSendMessage}
+                    className="bg-primary hover:bg-primary-hover text-white p-2 rounded-lg transition-all"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="flex-1 flex items-center justify-center">
+              <div className="text-center">
+                <MessageCircle className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Select a conversation
+                </h3>
+                <p className="text-muted-foreground">
+                  Choose a friend to start chatting
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   const renderWatchPartiesTab = () => (
     <div className="space-y-6">
       {/* Create Party Button */}
