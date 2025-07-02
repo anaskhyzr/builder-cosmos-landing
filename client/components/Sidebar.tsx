@@ -15,7 +15,6 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
     { id: "watchlist", icon: Heart, tooltip: "Watchlist" },
     { id: "ai-suggestions", icon: Sparkles, tooltip: "AI Suggestions" },
     { id: "social", icon: Users, tooltip: "Social Hub" },
-    { id: "analytics", icon: BarChart3, tooltip: "Analytics" },
     { id: "profile", icon: User, tooltip: "Profile" },
     { id: "settings", icon: Settings, tooltip: "Settings" },
   ];
