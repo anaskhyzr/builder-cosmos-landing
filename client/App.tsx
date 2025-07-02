@@ -6,6 +6,7 @@ import HomePage from "./pages/Index";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import SocialPage from "./pages/Social";
+import WatchlistPage from "./pages/Watchlist";
 import NotFound from "./pages/NotFound";
 
 // Placeholder components for other pages
