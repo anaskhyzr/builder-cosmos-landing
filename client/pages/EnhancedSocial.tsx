@@ -124,6 +124,155 @@ const EnhancedSocialPage: React.FC = () => {
   const [newMessage, setNewMessage] = useState("");
   const [showAddFriend, setShowAddFriend] = useState(false);
 
+  // Mock friends data
+  const friends: Friend[] = [
+    {
+      id: "1",
+      name: "Sarah Chen",
+      username: "sarahc_movies",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+      status: "online",
+      lastSeen: "now",
+      mutualFriends: 12,
+      commonMovies: 45,
+      isOnline: true,
+    },
+    {
+      id: "2",
+      name: "Mike Johnson",
+      username: "mikej_cinema",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      status: "watching",
+      lastSeen: "5 min ago",
+      mutualFriends: 8,
+      commonMovies: 32,
+      isOnline: true,
+    },
+    {
+      id: "3",
+      name: "Emma Davis",
+      username: "emmad_films",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+      status: "offline",
+      lastSeen: "2 hours ago",
+      mutualFriends: 15,
+      commonMovies: 67,
+      isOnline: false,
+    },
+    {
+      id: "4",
+      name: "Alex Rodriguez",
+      username: "alexr_moviebuff",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-c3f69c80808e?w=100&h=100&fit=crop&crop=face",
+      status: "online",
+      lastSeen: "now",
+      mutualFriends: 6,
+      commonMovies: 28,
+      isOnline: true,
+    },
+  ];
+
+  // Mock chat conversations
+  const [conversations, setConversations] = useState<ChatConversation[]>([
+    {
+      id: "chat-1",
+      participantId: "1",
+      participantName: "Sarah Chen",
+      participantAvatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+      lastMessage: "Have you seen the new Spider-Man movie?",
+      lastMessageTime: "2 min ago",
+      unreadCount: 2,
+      isOnline: true,
+      messages: [
+        {
+          id: "msg-1",
+          senderId: "1",
+          senderName: "Sarah Chen",
+          senderAvatar:
+            "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+          message: "Hey! What are you watching tonight?",
+          timestamp: "10:30 PM",
+          type: "text",
+        },
+        {
+          id: "msg-2",
+          senderId: "me",
+          senderName: "You",
+          senderAvatar: state.user?.avatar || "",
+          message: "Not sure yet! Any recommendations?",
+          timestamp: "10:32 PM",
+          type: "text",
+        },
+        {
+          id: "msg-3",
+          senderId: "1",
+          senderName: "Sarah Chen",
+          senderAvatar:
+            "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+          message: "Have you seen the new Spider-Man movie?",
+          timestamp: "10:35 PM",
+          type: "text",
+        },
+      ],
+    },
+    {
+      id: "chat-2",
+      participantId: "2",
+      participantName: "Mike Johnson",
+      participantAvatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      lastMessage: "Movie night tomorrow?",
+      lastMessageTime: "1 hour ago",
+      unreadCount: 0,
+      isOnline: true,
+      messages: [
+        {
+          id: "msg-4",
+          senderId: "2",
+          senderName: "Mike Johnson",
+          senderAvatar:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+          message: "Movie night tomorrow?",
+          timestamp: "9:30 PM",
+          type: "text",
+        },
+      ],
+    },
+  ]);
+
+  // Mock suggested friends
+  const suggestedFriends: Friend[] = [
+    {
+      id: "5",
+      name: "Jessica Park",
+      username: "jess_cinephile",
+      avatar:
+        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop&crop=face",
+      status: "online",
+      lastSeen: "now",
+      mutualFriends: 5,
+      commonMovies: 23,
+      isOnline: true,
+    },
+    {
+      id: "6",
+      name: "David Kim",
+      username: "david_movies",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      status: "offline",
+      lastSeen: "1 day ago",
+      mutualFriends: 3,
+      commonMovies: 18,
+      isOnline: false,
+    },
+  ];
+
   // Mock data
   const watchParties: WatchParty[] = [
     {
