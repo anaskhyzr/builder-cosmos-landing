@@ -37,128 +37,42 @@ const AISuggestionsPage: React.FC = () => {
   const [userContext, setUserContext] = useState<UserContext | null>(null);
   const [aiEngine, setAiEngine] = useState<EnhancedAIEngine | null>(null);
 
-  // AI Suggestion Algorithm
-  const generateSuggestions = (): Suggestion[] => {
-    const watchedIds = state.watchedMovies.map((m) => m.id);
-    const watchlistIds = state.watchlist.map((m) => m.id);
-    const excludeIds = [...watchedIds, ...watchlistIds];
-
-    const availableMovies = sampleMovies.filter(
-      (movie) => !excludeIds.includes(movie.id),
-    );
-
-    const suggestions: Suggestion[] = [];
-
-    // 1. Genre-based suggestions
-    const watchedGenres = state.watchedMovies.flatMap((movie) =>
-      movie.genre.split(",").map((g) => g.trim()),
-    );
-    const genreCount = watchedGenres.reduce(
-      (acc, genre) => {
-        acc[genre] = (acc[genre] || 0) + 1;
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-
-    const topGenres = Object.entries(genreCount)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 3)
-      .map(([genre]) => genre);
-
-    availableMovies.forEach((movie) => {
-      const movieGenres = movie.genre.split(",").map((g) => g.trim());
-      const genreMatch = movieGenres.some((g) => topGenres.includes(g));
-
-      if (genreMatch) {
-        const matchingGenre = movieGenres.find((g) => topGenres.includes(g));
-        suggestions.push({
-          movie,
-          reason: `You love ${matchingGenre} movies`,
-          confidence: 75 + Math.random() * 20,
-          type: "genre",
-        });
-      }
-    });
-
-    // 2. Similar title patterns (sequels/series)
-    state.watchedMovies.forEach((watchedMovie) => {
-      const baseName = watchedMovie.title.replace(/\d+|\s(II|III|IV|V)$/g, "");
-      availableMovies.forEach((movie) => {
-        if (
-          movie.title.includes(baseName) &&
-          movie.id !== watchedMovie.id &&
-          movie.year > watchedMovie.year
-        ) {
-          suggestions.push({
-            movie,
-            reason: `Sequel to ${watchedMovie.title}`,
-            confidence: 90 + Math.random() * 10,
-            type: "sequel",
-          });
-        }
-      });
-    });
-
-    // 3. Collaborative filtering (mock)
-    availableMovies.forEach((movie) => {
-      if (movie.rating >= 8.0) {
-        suggestions.push({
-          movie,
-          reason: "Highly rated by users with similar taste",
-          confidence: 65 + Math.random() * 25,
-          type: "collaborative",
-        });
-      }
-    });
-
-    // 4. Trending suggestions
-    availableMovies
-      .filter((movie) => movie.trending)
-      .forEach((movie) => {
-        suggestions.push({
-          movie,
-          reason: "Trending now among movie enthusiasts",
-          confidence: 70 + Math.random() * 20,
-          type: "trending",
-        });
-      });
-
-    // 5. Similar movies (mock algorithm)
-    state.watchedMovies.forEach((watchedMovie) => {
-      availableMovies.forEach((movie) => {
-        if (
-          Math.abs(movie.year - watchedMovie.year) <= 5 &&
-          movie.category === watchedMovie.category
-        ) {
-          suggestions.push({
-            movie,
-            reason: `Similar to ${watchedMovie.title}`,
-            confidence: 60 + Math.random() * 30,
-            type: "similar",
-          });
-        }
-      });
-    });
-
-    // Remove duplicates and sort by confidence
-    const uniqueSuggestions = suggestions
-      .filter(
-        (suggestion, index, self) =>
-          index === self.findIndex((s) => s.movie.id === suggestion.movie.id),
-      )
-      .sort((a, b) => b.confidence - a.confidence)
-      .slice(0, 12);
-
-    return uniqueSuggestions;
-  };
-
   useEffect(() => {
-    setIsGenerating(true);
+    const initializeAI = async () => {
+      setIsGenerating(true);
+
+      // Initialize AI engine and detect user context
+      const context = await detectUserContext();
+      setUserContext(context);
+
+      const engine = new EnhancedAIEngine(
+        state.watchedMovies,
+        {}, // User preferences would be loaded here
+        {}, // Social data would be loaded here
+      );
+      setAiEngine(engine);
+
+      // Generate enhanced suggestions
+      const watchedIds = state.watchedMovies.map((m) => m.id);
+      const watchlistIds = state.watchlist.map((m) => m.id);
+      const excludeIds = [...watchedIds, ...watchlistIds];
+
+      const availableMovies = sampleMovies.filter(
+        (movie) => !excludeIds.includes(movie.id),
+      );
+
+      const enhancedSuggestions = engine.generateEnhancedSuggestions(
+        availableMovies,
+        context,
+      );
+
+      setSuggestions(enhancedSuggestions);
+      setIsGenerating(false);
+    };
+
     // Simulate AI processing time
     const timer = setTimeout(() => {
-      setSuggestions(generateSuggestions());
-      setIsGenerating(false);
+      initializeAI();
     }, 1500);
 
     return () => clearTimeout(timer);
