@@ -101,8 +101,8 @@ const FeaturedMovie: React.FC<FeaturedMovieProps> = ({ movie, onWatch }) => {
             </button>
 
             <button className="flex items-center gap-3 glass-button px-8 py-4 rounded-xl font-semibold text-white hover:bg-white/20 transition-all duration-200">
-              <Download className="w-5 h-5" />
-              Download
+              <Share2 className="w-5 h-5" />
+              Share
             </button>
 
             <button
