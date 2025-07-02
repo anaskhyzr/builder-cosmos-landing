@@ -68,14 +68,7 @@ const AppContent: React.FC = () => {
       case "search":
         return <SearchPage />;
       case "profile":
-        return (
-          <div className="space-y-6">
-            <ProfilePage />
-            <div className="px-6">
-              <GamificationDashboard />
-            </div>
-          </div>
-        );
+        return <ProfilePage />;
       case "social":
         return <EnhancedSocialPage />;
       case "watchlist":
