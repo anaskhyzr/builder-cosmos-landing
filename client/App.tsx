@@ -6,10 +6,13 @@ import HomePage from "./pages/Index";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import SocialPage from "./pages/Social";
+import EnhancedSocialPage from "./pages/EnhancedSocial";
 import WatchlistPage from "./pages/Watchlist";
 import AISuggestionsPage from "./pages/AISuggestions";
+import AnalyticsPage from "./pages/Analytics";
 import SettingsPage from "./pages/Settings";
 import MovieDetailsModal from "./components/MovieDetailsModal";
+import GamificationDashboard from "./components/Gamification";
 import NotFound from "./pages/NotFound";
 
 // Placeholder components for other pages
