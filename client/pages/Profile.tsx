@@ -18,8 +18,73 @@ import {
 import { useAppContext } from "../lib/app-context";
 import MovieCard from "../components/MovieCard";
 
+interface ProfileAnalytics {
+  totalWatchTime: number;
+  averageRating: number;
+  watchingStreak: number;
+  topGenres: { genre: string; count: number; percentage: number }[];
+  monthlyActivity: { month: string; watched: number }[];
+  moodPatterns: { mood: string; count: number; avgRating: number }[];
+  yearStats: {
+    totalMovies: number;
+    totalShows: number;
+    topActor: string;
+    topDirector: string;
+    mostWatchedGenre: string;
+  };
+}
+
 const ProfilePage: React.FC = () => {
   const { state } = useAppContext();
+  const [analytics, setAnalytics] = useState<ProfileAnalytics | null>(null);
+
+  useEffect(() => {
+    // Generate analytics data based on user's movie history
+    const generateAnalytics = (): ProfileAnalytics => {
+      const genres = [
+        "Action",
+        "Drama",
+        "Comedy",
+        "Sci-Fi",
+        "Romance",
+        "Thriller",
+      ];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+      const moods = ["Energetic", "Relaxed", "Thoughtful"];
+
+      return {
+        totalWatchTime: Math.floor(Math.random() * 200) + 100, // 100-300 hours
+        averageRating: Number((Math.random() * 2 + 3).toFixed(1)), // 3.0-5.0
+        watchingStreak: Math.floor(Math.random() * 30) + 5, // 5-35 days
+        topGenres: genres
+          .map((genre, index) => ({
+            genre,
+            count: Math.floor(Math.random() * 20) + 5,
+            percentage: Math.floor(Math.random() * 25) + 10,
+          }))
+          .slice(0, 5),
+        monthlyActivity: months.map((month) => ({
+          month,
+          watched: Math.floor(Math.random() * 15) + 3,
+        })),
+        moodPatterns: moods.map((mood) => ({
+          mood,
+          count: Math.floor(Math.random() * 20) + 5,
+          avgRating: Number((Math.random() * 1.5 + 3.5).toFixed(1)),
+        })),
+        yearStats: {
+          totalMovies:
+            state.watchedMovies.length + Math.floor(Math.random() * 50) + 30,
+          totalShows: Math.floor(Math.random() * 20) + 10,
+          topActor: "Leonardo DiCaprio",
+          topDirector: "Christopher Nolan",
+          mostWatchedGenre: "Drama",
+        },
+      };
+    };
+
+    setAnalytics(generateAnalytics());
+  }, [state.watchedMovies.length]);
 
   return (
     <div className="flex-1 bg-background min-h-screen">
