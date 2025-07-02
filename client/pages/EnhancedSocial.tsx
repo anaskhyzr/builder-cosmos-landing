@@ -133,7 +133,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "1",
       name: "Sarah Chen",
       username: "sarahc_movies",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
       status: "online",
       lastSeen: "now",
       mutualFriends: 12,
@@ -144,7 +145,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "2",
       name: "Mike Johnson",
       username: "mikej_cinema",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       status: "watching",
       lastSeen: "5 min ago",
       mutualFriends: 8,
@@ -155,7 +157,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "3",
       name: "Emma Davis",
       username: "emmad_films",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
       status: "offline",
       lastSeen: "2 hours ago",
       mutualFriends: 15,
@@ -166,7 +169,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "4",
       name: "Alex Rodriguez",
       username: "alexr_moviebuff",
-      avatar: "https://images.unsplash.com/photo-1500648767791-c3f69c80808e?w=100&h=100&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-c3f69c80808e?w=100&h=100&fit=crop&crop=face",
       status: "online",
       lastSeen: "now",
       mutualFriends: 6,
@@ -181,7 +185,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "chat-1",
       participantId: "1",
       participantName: "Sarah Chen",
-      participantAvatar: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+      participantAvatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
       lastMessage: "Have you seen the new Spider-Man movie?",
       lastMessageTime: "2 min ago",
       unreadCount: 2,
@@ -191,7 +196,8 @@ const EnhancedSocialPage: React.FC = () => {
           id: "msg-1",
           senderId: "1",
           senderName: "Sarah Chen",
-          senderAvatar: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+          senderAvatar:
+            "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
           message: "Hey! What are you watching tonight?",
           timestamp: "10:30 PM",
           type: "text",
@@ -209,7 +215,8 @@ const EnhancedSocialPage: React.FC = () => {
           id: "msg-3",
           senderId: "1",
           senderName: "Sarah Chen",
-          senderAvatar: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
+          senderAvatar:
+            "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=face",
           message: "Have you seen the new Spider-Man movie?",
           timestamp: "10:35 PM",
           type: "text",
@@ -220,7 +227,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "chat-2",
       participantId: "2",
       participantName: "Mike Johnson",
-      participantAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      participantAvatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       lastMessage: "Movie night tomorrow?",
       lastMessageTime: "1 hour ago",
       unreadCount: 0,
@@ -230,7 +238,8 @@ const EnhancedSocialPage: React.FC = () => {
           id: "msg-4",
           senderId: "2",
           senderName: "Mike Johnson",
-          senderAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+          senderAvatar:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
           message: "Movie night tomorrow?",
           timestamp: "9:30 PM",
           type: "text",
@@ -245,7 +254,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "5",
       name: "Jessica Park",
       username: "jess_cinephile",
-      avatar: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop&crop=face",
       status: "online",
       lastSeen: "now",
       mutualFriends: 5,
@@ -256,7 +266,8 @@ const EnhancedSocialPage: React.FC = () => {
       id: "6",
       name: "David Kim",
       username: "david_movies",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       status: "offline",
       lastSeen: "1 day ago",
       mutualFriends: 3,
@@ -410,20 +421,25 @@ const EnhancedSocialPage: React.FC = () => {
       senderName: "You",
       senderAvatar: state.user?.avatar || "",
       message: newMessage,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
       type: "text",
     };
 
-    setConversations(prev => prev.map(conv =>
-      conv.id === selectedChat
-        ? {
-            ...conv,
-            messages: [...conv.messages, newMsg],
-            lastMessage: newMessage,
-            lastMessageTime: "now"
-          }
-        : conv
-    ));
+    setConversations((prev) =>
+      prev.map((conv) =>
+        conv.id === selectedChat
+          ? {
+              ...conv,
+              messages: [...conv.messages, newMsg],
+              lastMessage: newMessage,
+              lastMessageTime: "now",
+            }
+          : conv,
+      ),
+    );
 
     setNewMessage("");
   };
@@ -463,7 +479,10 @@ const EnhancedSocialPage: React.FC = () => {
         {/* Friends List */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {friends.map((friend) => (
-            <div key={friend.id} className="glass-card p-4 hover:bg-card-hover transition-all">
+            <div
+              key={friend.id}
+              className="glass-card p-4 hover:bg-card-hover transition-all"
+            >
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <img
@@ -471,17 +490,23 @@ const EnhancedSocialPage: React.FC = () => {
                     alt={friend.name}
                     className="w-12 h-12 object-cover rounded-full"
                   />
-                  <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-background ${
-                    friend.status === "online"
-                      ? "bg-green-500"
-                      : friend.status === "watching"
-                        ? "bg-blue-500"
-                        : "bg-gray-500"
-                  }`} />
+                  <div
+                    className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-background ${
+                      friend.status === "online"
+                        ? "bg-green-500"
+                        : friend.status === "watching"
+                          ? "bg-blue-500"
+                          : "bg-gray-500"
+                    }`}
+                  />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-foreground">{friend.name}</h4>
-                  <p className="text-sm text-muted-foreground">@{friend.username}</p>
+                  <h4 className="font-semibold text-foreground">
+                    {friend.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    @{friend.username}
+                  </p>
                   <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
                     <span>{friend.mutualFriends} mutual friends</span>
                     <span>•</span>
@@ -491,7 +516,9 @@ const EnhancedSocialPage: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => {
-                      const existingConv = conversations.find(c => c.participantId === friend.id);
+                      const existingConv = conversations.find(
+                        (c) => c.participantId === friend.id,
+                      );
                       if (existingConv) {
                         setSelectedChat(existingConv.id);
                       } else {
@@ -514,7 +541,9 @@ const EnhancedSocialPage: React.FC = () => {
 
       {/* Suggested Friends */}
       <div className="glass-card p-6">
-        <h3 className="text-xl font-semibold text-foreground mb-4">People You May Know</h3>
+        <h3 className="text-xl font-semibold text-foreground mb-4">
+          People You May Know
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {suggestedFriends.map((friend) => (
             <div key={friend.id} className="glass bg-accent/30 p-4 rounded-xl">
@@ -525,8 +554,12 @@ const EnhancedSocialPage: React.FC = () => {
                   className="w-12 h-12 object-cover rounded-full"
                 />
                 <div className="flex-1">
-                  <h4 className="font-semibold text-foreground">{friend.name}</h4>
-                  <p className="text-sm text-muted-foreground">@{friend.username}</p>
+                  <h4 className="font-semibold text-foreground">
+                    {friend.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    @{friend.username}
+                  </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {friend.mutualFriends} mutual friends
                   </p>
@@ -551,7 +584,9 @@ const EnhancedSocialPage: React.FC = () => {
       <div className="lg:col-span-1">
         <div className="glass-card h-full flex flex-col">
           <div className="p-4 border-b border-border">
-            <h3 className="text-lg font-semibold text-foreground mb-3">Messages</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-3">
+              Messages
+            </h3>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
@@ -562,38 +597,53 @@ const EnhancedSocialPage: React.FC = () => {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto custom-scrollbar">
-            {conversations && conversations.length > 0 ? conversations.map((conv) => (
-              <button
-                key={conv.id}
-                onClick={() => setSelectedChat(conv.id)}
-                className={`w-full p-4 flex items-center gap-3 hover:bg-accent/30 transition-all text-left ${
-                  selectedChat === conv.id ? "bg-primary/10 border-r-2 border-primary" : ""
-                }`}
-              >
-                <div className="relative">
-                  <img
-                    src={conv.participantAvatar}
-                    alt={conv.participantName}
-                    className="w-12 h-12 object-cover rounded-full"
-                  />
-                  {conv.isOnline && (
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
+            {conversations && conversations.length > 0 ? (
+              conversations.map((conv) => (
+                <button
+                  key={conv.id}
+                  onClick={() => setSelectedChat(conv.id)}
+                  className={`w-full p-4 flex items-center gap-3 hover:bg-accent/30 transition-all text-left ${
+                    selectedChat === conv.id
+                      ? "bg-primary/10 border-r-2 border-primary"
+                      : ""
+                  }`}
+                >
+                  <div className="relative">
+                    <img
+                      src={conv.participantAvatar}
+                      alt={conv.participantName}
+                      className="w-12 h-12 object-cover rounded-full"
+                    />
+                    {conv.isOnline && (
+                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <h4 className="font-semibold text-foreground truncate">
+                        {conv.participantName}
+                      </h4>
+                      <span className="text-xs text-muted-foreground">
+                        {conv.lastMessageTime}
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {conv.lastMessage}
+                    </p>
+                  </div>
+                  {conv.unreadCount > 0 && (
+                    <div className="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center text-xs">
+                      {conv.unreadCount}
+                    </div>
                   )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-1">
-                    <h4 className="font-semibold text-foreground truncate">{conv.participantName}</h4>
-                    <span className="text-xs text-muted-foreground">{conv.lastMessageTime}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground truncate">{conv.lastMessage}</p>
-                </div>
-                {conv.unreadCount > 0 && (
-                  <div className="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center text-xs">
-                    {conv.unreadCount}
-                  </div>
-                )}
-              </button>
-            ))}
+                </button>
+              ))
+            ) : (
+              <div className="p-8 text-center">
+                <MessageCircle className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                <p className="text-muted-foreground">No conversations yet</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -607,13 +657,19 @@ const EnhancedSocialPage: React.FC = () => {
               <div className="p-4 border-b border-border">
                 <div className="flex items-center gap-3">
                   <img
-                    src={conversations.find(c => c.id === selectedChat)?.participantAvatar}
+                    src={
+                      conversations.find((c) => c.id === selectedChat)
+                        ?.participantAvatar
+                    }
                     alt=""
                     className="w-10 h-10 object-cover rounded-full"
                   />
                   <div>
                     <h3 className="font-semibold text-foreground">
-                      {conversations.find(c => c.id === selectedChat)?.participantName}
+                      {
+                        conversations.find((c) => c.id === selectedChat)
+                          ?.participantName
+                      }
                     </h3>
                     <p className="text-sm text-green-500">Online</p>
                   </div>
@@ -633,32 +689,36 @@ const EnhancedSocialPage: React.FC = () => {
 
               {/* Messages */}
               <div className="flex-1 p-4 overflow-y-auto custom-scrollbar space-y-4">
-                {conversations.find(c => c.id === selectedChat)?.messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`flex gap-3 ${message.senderId === "me" ? "flex-row-reverse" : ""}`}
-                  >
-                    <img
-                      src={message.senderAvatar}
-                      alt=""
-                      className="w-8 h-8 object-cover rounded-full flex-shrink-0"
-                    />
-                    <div className={`max-w-xs lg:max-w-md ${message.senderId === "me" ? "text-right" : ""}`}>
+                {conversations
+                  .find((c) => c.id === selectedChat)
+                  ?.messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex gap-3 ${message.senderId === "me" ? "flex-row-reverse" : ""}`}
+                    >
+                      <img
+                        src={message.senderAvatar}
+                        alt=""
+                        className="w-8 h-8 object-cover rounded-full flex-shrink-0"
+                      />
                       <div
-                        className={`p-3 rounded-xl ${
-                          message.senderId === "me"
-                            ? "bg-primary text-white"
-                            : "bg-accent text-foreground"
-                        }`}
+                        className={`max-w-xs lg:max-w-md ${message.senderId === "me" ? "text-right" : ""}`}
                       >
-                        <p>{message.message}</p>
+                        <div
+                          className={`p-3 rounded-xl ${
+                            message.senderId === "me"
+                              ? "bg-primary text-white"
+                              : "bg-accent text-foreground"
+                          }`}
+                        >
+                          <p>{message.message}</p>
+                        </div>
+                        <span className="text-xs text-muted-foreground mt-1 block">
+                          {message.timestamp}
+                        </span>
                       </div>
-                      <span className="text-xs text-muted-foreground mt-1 block">
-                        {message.timestamp}
-                      </span>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
 
               {/* Message Input */}
@@ -672,7 +732,9 @@ const EnhancedSocialPage: React.FC = () => {
                       type="text"
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
-                      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSendMessage()
+                      }
                       placeholder="Type a message..."
                       className="w-full px-4 py-2 bg-input border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
                     />
@@ -690,8 +752,12 @@ const EnhancedSocialPage: React.FC = () => {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <MessageCircle className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">Select a conversation</h3>
-                <p className="text-muted-foreground">Choose a friend to start chatting</p>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Select a conversation
+                </h3>
+                <p className="text-muted-foreground">
+                  Choose a friend to start chatting
+                </p>
               </div>
             </div>
           )}
