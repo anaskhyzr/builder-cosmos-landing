@@ -22,6 +22,9 @@ import {
   Heart,
   Eye,
   Film,
+  MoreHorizontal,
+  Phone,
+  Send,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 
