@@ -10,10 +10,24 @@ import {
   Lightbulb,
   Target,
   Brain,
+  Cloud,
+  Sun,
+  CloudRain,
+  Snowflake,
+  Zap,
+  Heart,
+  Calendar,
+  Smartphone,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 import { Movie, sampleMovies } from "../lib/movie-data";
 import MovieCard from "../components/MovieCard";
+import {
+  EnhancedAIEngine,
+  EnhancedSuggestion,
+  UserContext,
+  detectUserContext,
+} from "../lib/enhanced-ai";
 
 interface Suggestion {
   movie: Movie;
