@@ -1,5 +1,20 @@
-import React from "react";
-import { Calendar, Film, Clock, Star, Edit } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import {
+  Calendar,
+  Film,
+  Clock,
+  Star,
+  Edit,
+  BarChart3,
+  TrendingUp,
+  Activity,
+  Target,
+  Award,
+  Users,
+  Eye,
+  Heart,
+  Zap,
+} from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 import MovieCard from "../components/MovieCard";
 
