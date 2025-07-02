@@ -299,7 +299,10 @@ const SettingsPage: React.FC = () => {
             </label>
             <input
               type="email"
-              value={state.user?.email || ""}
+              value={profileForm.email}
+              onChange={(e) =>
+                setProfileForm({ ...profileForm, email: e.target.value })
+              }
               className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary"
             />
           </div>
@@ -308,7 +311,10 @@ const SettingsPage: React.FC = () => {
               Bio
             </label>
             <textarea
-              value={state.user?.bio || ""}
+              value={profileForm.bio}
+              onChange={(e) =>
+                setProfileForm({ ...profileForm, bio: e.target.value })
+              }
               rows={3}
               className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary resize-none"
             />
