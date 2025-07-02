@@ -7,6 +7,9 @@ import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import SocialPage from "./pages/Social";
 import WatchlistPage from "./pages/Watchlist";
+import AISuggestionsPage from "./pages/AISuggestions";
+import SettingsPage from "./pages/Settings";
+import MovieDetailsModal from "./components/MovieDetailsModal";
 import NotFound from "./pages/NotFound";
 
 // Placeholder components for other pages
