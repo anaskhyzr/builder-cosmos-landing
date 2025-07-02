@@ -77,6 +77,45 @@ interface UserList {
   thumbnail: string;
 }
 
+interface Friend {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string;
+  status: "online" | "offline" | "watching";
+  lastSeen: string;
+  mutualFriends: number;
+  commonMovies: number;
+  isOnline: boolean;
+}
+
+interface ChatMessage {
+  id: string;
+  senderId: string;
+  senderName: string;
+  senderAvatar: string;
+  message: string;
+  timestamp: string;
+  type: "text" | "movie" | "image";
+  movieData?: {
+    title: string;
+    poster: string;
+    rating: number;
+  };
+}
+
+interface ChatConversation {
+  id: string;
+  participantId: string;
+  participantName: string;
+  participantAvatar: string;
+  lastMessage: string;
+  lastMessageTime: string;
+  unreadCount: number;
+  isOnline: boolean;
+  messages: ChatMessage[];
+}
+
 const EnhancedSocialPage: React.FC = () => {
   const { state } = useAppContext();
   const [activeTab, setActiveTab] = useState("friends");
