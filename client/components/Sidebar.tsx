@@ -1,5 +1,13 @@
 import React from "react";
-import { Home, Heart, Users, User, Settings, Sparkles } from "lucide-react";
+import {
+  Home,
+  Heart,
+  Users,
+  User,
+  Settings,
+  Sparkles,
+  BarChart3,
+} from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 
 interface SidebarProps {
