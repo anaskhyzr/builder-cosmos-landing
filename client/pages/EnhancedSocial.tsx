@@ -1139,6 +1139,8 @@ const EnhancedSocialPage: React.FC = () => {
 
         {/* Tab Content */}
         <div>
+          {activeTab === "friends" && renderFriendsTab()}
+          {activeTab === "chats" && renderChatsTab()}
           {activeTab === "watch-parties" && renderWatchPartiesTab()}
           {activeTab === "movie-clubs" && renderMovieClubsTab()}
           {activeTab === "challenges" && renderChallengesTab()}
