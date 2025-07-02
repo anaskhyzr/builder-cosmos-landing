@@ -97,31 +97,12 @@ const AppContent: React.FC = () => {
       {/* Main Content */}
       <main className="flex-1">{renderPage()}</main>
 
-      {/* Movie Modal (placeholder for now) */}
-      {state.showMovieModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-          <div className="glass-card max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-foreground">
-                  {state.selectedMovie?.title}
-                </h2>
-                <button
-                  onClick={() =>
-                    dispatch({ type: "TOGGLE_MOVIE_MODAL", payload: false })
-                  }
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  ✕
-                </button>
-              </div>
-              <p className="text-muted-foreground">
-                Movie details modal coming soon...
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Movie Details Modal */}
+      <MovieDetailsModal
+        movie={state.selectedMovie}
+        isOpen={state.showMovieModal}
+        onClose={() => dispatch({ type: "TOGGLE_MOVIE_MODAL", payload: false })}
+      />
     </div>
   );
 };
