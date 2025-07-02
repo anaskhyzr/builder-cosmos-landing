@@ -401,6 +401,8 @@ const EnhancedSocialPage: React.FC = () => {
   ];
 
   const tabs = [
+    { id: "friends", label: "Friends", icon: Users },
+    { id: "chats", label: "Chats", icon: MessageCircle },
     { id: "watch-parties", label: "Watch Parties", icon: Play },
     { id: "movie-clubs", label: "Movie Clubs", icon: Users },
     { id: "challenges", label: "Challenges", icon: Trophy },
