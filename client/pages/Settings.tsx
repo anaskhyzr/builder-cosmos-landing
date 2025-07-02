@@ -90,6 +90,14 @@ const SettingsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
+  // Profile form state
+  const [profileForm, setProfileForm] = useState({
+    name: state.user?.name || "",
+    username: state.user?.username || "",
+    email: state.user?.email || "",
+    bio: state.user?.bio || "",
+  });
+
   const [preferences, setPreferences] = useState<UserPreferences>({
     rewatchFrequency: "rarely",
     preferredGenres: ["Action", "Sci-Fi", "Drama"],
