@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { AppProvider, useAppContext } from "./lib/app-context";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/Index";
+import LandingPage from "./pages/Landing";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import SocialPage from "./pages/Social";
