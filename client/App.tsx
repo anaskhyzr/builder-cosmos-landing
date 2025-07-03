@@ -56,9 +56,16 @@ const AppContent: React.FC = () => {
     setCurrentPage("home");
   };
 
-  // If not authenticated, show login page
+  const handleGetStarted = () => {
+    setCurrentPage("login");
+  };
+
+  // If not authenticated, show landing page
   if (!state.isAuthenticated) {
-    return <LoginPage onLogin={handleLogin} />;
+    if (currentPage === "login") {
+      return <LoginPage onLogin={handleLogin} />;
+    }
+    return <LandingPage onGetStarted={handleGetStarted} />;
   }
 
   const renderPage = () => {
