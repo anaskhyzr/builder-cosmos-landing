@@ -100,12 +100,12 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Sidebar */}
-      <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
-
+    <div className="min-h-screen bg-background">
       {/* Main Content */}
-      <main className="flex-1">{renderPage()}</main>
+      <main className="pb-24">{renderPage()}</main>
+
+      {/* Bottom Navigation */}
+      <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
 
       {/* Movie Details Modal */}
       <MovieDetailsModal
