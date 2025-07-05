@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Play, Plus, Check, Clock, MoreHorizontal } from "lucide-react";
+import { Star, Plus, Check, Clock, MoreHorizontal } from "lucide-react";
 import { Movie } from "../lib/movie-data";
 import { useAppContext, useToast } from "../lib/app-context";
 
