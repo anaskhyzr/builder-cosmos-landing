@@ -145,8 +145,8 @@ const MovieCard: React.FC<MovieCardProps> = ({
       </div>
 
       {/* Movie Info */}
-      <div className="p-6">
-        <h3 className="text-xl font-medium text-foreground truncate group-hover:text-primary transition-colors">
+      <div className="p-3">
+        <h3 className="text-sm font-medium text-foreground truncate group-hover:text-primary transition-colors">
           {movie.title}
         </h3>
       </div>
