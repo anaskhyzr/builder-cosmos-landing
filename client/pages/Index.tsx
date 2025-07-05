@@ -88,16 +88,11 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
         <div className="mt-12">
           {isSearchActive && debouncedSearchQuery ? (
             // Search Results
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-foreground mb-2">
-                  Search Results
+                <h2 className="text-3xl font-bold text-foreground">
+                  {searchResults.length} Results
                 </h2>
-                <p className="text-muted-foreground">
-                  {searchResults.length}{" "}
-                  {searchResults.length === 1 ? "movie" : "movies"} found for "
-                  {debouncedSearchQuery}"
-                </p>
               </div>
 
               {searchResults.length === 0 ? (
