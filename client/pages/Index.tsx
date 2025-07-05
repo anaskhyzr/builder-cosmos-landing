@@ -125,15 +125,18 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
             </div>
           ) : (
             // Popular Movies (Default State)
-            <div className="space-y-6">
-              <div className="text-center">
-                <h2 className="text-xl font-bold text-foreground">
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-light text-foreground/80 mb-1">
                   Popular Movies
                 </h2>
+                <p className="text-sm text-foreground/50">
+                  Trending picks for you
+                </p>
               </div>
 
               <div className="flex justify-center">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
                   {popularMovies.map((movie) => (
                     <div
                       key={movie.id}
