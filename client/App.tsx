@@ -85,8 +85,7 @@ const AppContent: React.FC = () => {
 
       case "movies":
         return <CategoryPage category="movies" />;
-      case "tv":
-        return <CategoryPage category="tv series" />;
+
       case "animation":
         return <CategoryPage category="animation" />;
       case "military":
