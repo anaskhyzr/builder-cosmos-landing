@@ -30,14 +30,14 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
               <button
                 key={item.id}
                 onClick={() => onPageChange(item.id)}
-                className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
+                className={`group relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 ${
                   isActive
-                    ? "bg-primary/20 text-primary border border-primary/30"
-                    : "text-foreground/50 hover:text-foreground hover:bg-glass/30"
+                    ? "bg-primary/20 text-primary"
+                    : "text-foreground/40 hover:text-foreground/70 hover:bg-white/5"
                 }`}
                 title={item.tooltip}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-4 h-4" />
               </button>
             );
           })}
