@@ -68,17 +68,17 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
           </div>
 
           {/* Centered Search Bar */}
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-3xl">
             <div className="relative">
-              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 text-muted-foreground" />
+              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 w-8 h-8 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search for movies, genres, or years..."
+                placeholder="Search movies..."
                 value={searchQuery}
                 onChange={handleSearchChange}
                 onFocus={handleSearchFocus}
                 onBlur={handleSearchBlur}
-                className="w-full pl-16 pr-6 py-6 bg-glass/40 backdrop-blur-xl border border-glass-border/30 rounded-2xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:bg-glass/60 transition-all duration-300 text-lg shadow-2xl"
+                className="w-full pl-20 pr-8 py-8 bg-glass/40 backdrop-blur-xl border border-glass-border/30 rounded-3xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:bg-glass/60 transition-all duration-300 text-2xl shadow-2xl"
               />
             </div>
           </div>
