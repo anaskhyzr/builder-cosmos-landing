@@ -1,12 +1,9 @@
 import React from "react";
-import { Star, Plus, Check, Clock, MoreHorizontal } from "lucide-react";
 import { Movie } from "../lib/movie-data";
-import { useAppContext, useToast } from "../lib/app-context";
 
 interface MovieCardProps {
   movie: Movie;
   onClick?: (movie: Movie) => void;
-  showActions?: boolean;
   size?: "small" | "medium" | "large";
   showProgress?: boolean;
 }
@@ -14,33 +11,9 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({
   movie,
   onClick,
-  showActions = true,
   size = "medium",
   showProgress = false,
 }) => {
-  const { state, dispatch } = useAppContext();
-  const { showToast } = useToast();
-
-  const isInWatchlist = state.watchlist.some((item) => item.id === movie.id);
-  const isWatched = state.watchedMovies.some((item) => item.id === movie.id);
-
-  const handleAddToWatchlist = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (isInWatchlist) {
-      dispatch({ type: "REMOVE_FROM_WATCHLIST", payload: movie.id });
-      showToast("Removed from watchlist", "info");
-    } else {
-      dispatch({ type: "ADD_TO_WATCHLIST", payload: movie });
-      showToast("Added to watchlist", "success");
-    }
-  };
-
-  const handleMarkAsWatched = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    dispatch({ type: "ADD_TO_WATCHED", payload: movie });
-    showToast("Marked as watched", "success");
-  };
-
   const handleClick = () => {
     if (onClick) {
       onClick(movie);
