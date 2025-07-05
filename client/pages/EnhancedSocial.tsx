@@ -12,7 +12,6 @@ import {
   Video,
   Share2,
   Plus,
-  Settings,
   Search,
   Filter,
   Zap,
