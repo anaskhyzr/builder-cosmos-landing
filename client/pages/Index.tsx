@@ -148,40 +148,6 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
             </div>
           )}
         </div>
-
-        {/* Search Tips */}
-        {!isSearchActive && (
-          <div className="mt-16">
-            <div className="glass-card p-8 text-center">
-              <h3 className="text-xl font-semibold text-foreground mb-4">
-                Search Tips
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-muted-foreground">
-                <div className="space-y-2">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                    <Search className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="font-medium">By Title</p>
-                  <p className="text-sm">Search for movie names</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                    <span className="text-primary font-bold">🎭</span>
-                  </div>
-                  <p className="font-medium">By Genre</p>
-                  <p className="text-sm">Find movies by genre</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                    <span className="text-primary font-bold">📅</span>
-                  </div>
-                  <p className="font-medium">By Year</p>
-                  <p className="text-sm">Search by release year</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
