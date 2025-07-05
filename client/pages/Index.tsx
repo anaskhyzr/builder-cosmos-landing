@@ -61,13 +61,10 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
       <div className="container mx-auto px-6 py-12">
         {/* Centered Search Section */}
         <div className="flex flex-col items-center justify-center min-h-[40vh] space-y-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+          <div className="text-center space-y-6">
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground">
               Discover Movies
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl">
-              Search through thousands of movies and find your next favorite
-            </p>
           </div>
 
           {/* Centered Search Bar */}
