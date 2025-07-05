@@ -68,9 +68,9 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
           </div>
 
           {/* Centered Search Bar */}
-          <div className="w-full max-w-xl">
+          <div className="w-full max-w-2xl">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-foreground/40" />
               <input
                 type="text"
                 placeholder="Search movies..."
@@ -78,7 +78,7 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
                 onChange={handleSearchChange}
                 onFocus={handleSearchFocus}
                 onBlur={handleSearchBlur}
-                className="w-full pl-12 pr-4 py-4 bg-glass/40 backdrop-blur-xl border border-glass-border/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:bg-glass/60 transition-all duration-300 text-base shadow-2xl"
+                className="w-full pl-14 pr-6 py-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl text-foreground/90 placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:bg-white/8 transition-all duration-200 text-base shadow-lg"
               />
             </div>
           </div>
