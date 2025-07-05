@@ -8,7 +8,7 @@ export interface Movie {
   backdrop?: string;
   description: string;
   duration?: string;
-  category: "movie" | "tv" | "animation" | "military";
+  category: "movie" | "animation" | "military";
   trending?: boolean;
   featured?: boolean;
   progress?: number; // for continue watching
