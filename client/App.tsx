@@ -82,8 +82,7 @@ const AppContent: React.FC = () => {
         return <WatchlistPage />;
       case "ai-suggestions":
         return <AISuggestionsPage />;
-      case "settings":
-        return <SettingsPage />;
+
       case "movies":
         return <CategoryPage category="movies" />;
       case "tv":
