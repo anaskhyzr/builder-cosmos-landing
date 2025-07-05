@@ -20,8 +20,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
 
   return (
     <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="bg-background-secondary/90 backdrop-blur-xl rounded-full border border-glass-border/30 shadow-2xl">
-        <div className="flex items-center gap-2 p-3">
+      <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 shadow-xl">
+        <div className="flex items-center gap-1 p-2">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentPage === item.id;
