@@ -122,14 +122,11 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
             </div>
           ) : (
             // Popular Movies (Default State)
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-foreground mb-2">
+                <h2 className="text-3xl font-bold text-foreground">
                   Popular Movies
                 </h2>
-                <p className="text-muted-foreground">
-                  Start typing to search or explore these popular picks
-                </p>
               </div>
 
               <div className="flex justify-center">
