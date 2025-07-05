@@ -145,39 +145,10 @@ const MovieCard: React.FC<MovieCardProps> = ({
       </div>
 
       {/* Movie Info */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-foreground mb-1 truncate group-hover:text-primary transition-colors">
+      <div className="p-6">
+        <h3 className="text-xl font-medium text-foreground truncate group-hover:text-primary transition-colors">
           {movie.title}
         </h3>
-        <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-          <span>{movie.year}</span>
-          {movie.duration && <span>{movie.duration}</span>}
-        </div>
-        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-          {movie.genre.split(",")[0]}
-        </p>
-
-        {/* Action Buttons (Mobile) */}
-        {showActions && (
-          <div className="flex gap-2 md:hidden">
-            <button
-              onClick={handleAddToWatchlist}
-              className={`flex-1 glass-button py-2 text-xs font-medium ${
-                isInWatchlist
-                  ? "text-green-400 border-green-400/30"
-                  : "text-white"
-              }`}
-            >
-              {isInWatchlist ? "In List" : "Watchlist"}
-            </button>
-            <button
-              onClick={handleMarkAsWatched}
-              className="flex-1 glass-button py-2 text-xs font-medium text-white"
-            >
-              Watched
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
