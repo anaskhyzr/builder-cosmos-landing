@@ -85,12 +85,12 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
         </div>
 
         {/* Search Results or Popular Movies */}
-        <div className="mt-12">
+        <div className="mt-8">
           {isSearchActive && debouncedSearchQuery ? (
             // Search Results
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="text-center">
-                <h2 className="text-3xl font-bold text-foreground">
+                <h2 className="text-xl font-bold text-foreground">
                   {searchResults.length} Results
                 </h2>
               </div>
