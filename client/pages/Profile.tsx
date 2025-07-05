@@ -149,11 +149,18 @@ const ProfilePage: React.FC = () => {
         {/* Profile Header */}
         <div className="glass-card">
           <div className="flex items-start gap-6 p-8">
-            <img
-              src={state.user?.avatar}
-              alt={state.user?.name}
-              className="w-32 h-32 object-cover rounded-2xl"
-            />
+            <div className="relative">
+              <img
+                src={state.user?.avatar}
+                alt={state.user?.name}
+                className="w-32 h-32 object-cover rounded-2xl"
+              />
+              {activeTab === "settings" && (
+                <button className="absolute bottom-0 right-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
+                  <Camera className="w-4 h-4" />
+                </button>
+              )}
+            </div>
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-4">
                 <h1 className="text-3xl font-bold text-foreground">
