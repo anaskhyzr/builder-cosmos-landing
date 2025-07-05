@@ -87,20 +87,7 @@ export const sampleMovies: Movie[] = [
     category: "movie",
     progress: 75,
   },
-  {
-    id: 8,
-    title: "Loki Season 2",
-    year: 2023,
-    rating: 8.2,
-    genre: "Action, Adventure, Fantasy",
-    poster:
-      "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=300&h=450&fit=crop",
-    description:
-      "Loki finds himself in a battle for the soul of the Time Variance Authority.",
-    duration: "50m",
-    category: "tv",
-    progress: 30,
-  },
+
   {
     id: 9,
     title: "Avatar: The Way of Water",
