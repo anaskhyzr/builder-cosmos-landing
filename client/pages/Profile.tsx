@@ -211,8 +211,11 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Enhanced Stats with Analytics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Tab Content */}
+        {activeTab === "overview" && (
+          <>
+            {/* Enhanced Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="glass-card p-6 text-center">
             <Film className="w-8 h-8 text-primary mx-auto mb-3" />
             <div className="text-3xl font-bold text-primary mb-2">
