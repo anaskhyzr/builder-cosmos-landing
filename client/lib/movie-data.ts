@@ -155,8 +155,7 @@ export const sampleMovies: Movie[] = [
 ];
 
 export const categories = [
-  { id: "all", label: "Movies", value: "all" },
-  { id: "tv", label: "TV Series", value: "tv" },
+  { id: "all", label: "All Movies", value: "all" },
   { id: "animation", label: "Animation", value: "animation" },
   { id: "military", label: "Military", value: "military" },
   { id: "more", label: "More", value: "more" },
