@@ -45,19 +45,7 @@ export const sampleMovies: Movie[] = [
     duration: "2h 24m",
     category: "movie",
   },
-  {
-    id: 3,
-    title: "Manifest",
-    year: 2018,
-    rating: 7.1,
-    genre: "Drama, Mystery, Sci-Fi",
-    poster:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=450&fit=crop",
-    description:
-      "When a commercial airliner suddenly reappears after being missing for five years, those aboard must reintegrate into society.",
-    duration: "42m",
-    category: "tv",
-  },
+
   {
     id: 4,
     title: "Elemental",
