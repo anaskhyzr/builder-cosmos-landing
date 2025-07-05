@@ -122,6 +122,27 @@ const ProfilePage: React.FC = () => {
     setAnalytics(generateAnalytics());
   }, [state.watchedMovies.length]);
 
+  const tabs = [
+    { id: "overview", label: "Overview", icon: User },
+    { id: "analytics", label: "Analytics", icon: BarChart3 },
+    { id: "settings", label: "Settings", icon: Settings },
+  ];
+
+  const renderToggle = (enabled: boolean, onChange: () => void) => (
+    <button
+      onClick={onChange}
+      className={`relative w-12 h-6 rounded-full transition-all duration-200 ${
+        enabled ? "bg-primary" : "bg-gray-300 dark:bg-gray-600"
+      }`}
+    >
+      <div
+        className={`absolute w-5 h-5 bg-white rounded-full transition-transform duration-200 ${
+          enabled ? "translate-x-6" : "translate-x-0.5"
+        } top-0.5`}
+      />
+    </button>
+  );
+
   return (
     <div className="flex-1 bg-background min-h-screen">
       <div className="p-6 space-y-8">
