@@ -46,6 +46,33 @@ interface ProfileAnalytics {
 const ProfilePage: React.FC = () => {
   const { state } = useAppContext();
   const [analytics, setAnalytics] = useState<ProfileAnalytics | null>(null);
+  const [activeTab, setActiveTab] = useState("overview");
+  const [profileForm, setProfileForm] = useState({
+    name: state.user?.name || "",
+    username: state.user?.username || "",
+    email: state.user?.email || "",
+    bio: state.user?.bio || "",
+  });
+  const [preferences, setPreferences] = useState({
+    theme: "dark",
+    language: "en",
+    notifications: {
+      friendReviews: true,
+      newSuggestions: true,
+      socialActivity: false,
+      weeklyDigest: true,
+    },
+    privacy: {
+      profileVisible: true,
+      watchHistoryVisible: true,
+      showOnlineStatus: true,
+    },
+    ai: {
+      suggestionsEnabled: true,
+      moodBasedSuggestions: true,
+      trendingWeight: 30,
+    },
+  });
 
   useEffect(() => {
     // Generate analytics data based on user's movie history
