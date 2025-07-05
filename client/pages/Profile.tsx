@@ -14,6 +14,15 @@ import {
   Eye,
   Heart,
   Zap,
+  Settings,
+  Bell,
+  Shield,
+  Palette,
+  Brain,
+  User,
+  Save,
+  Globe,
+  Camera,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 import MovieCard from "../components/MovieCard";
