@@ -38,7 +38,6 @@ interface ProfileAnalytics {
   moodPatterns: { mood: string; count: number; avgRating: number }[];
   yearStats: {
     totalMovies: number;
-    totalShows: number;
     topActor: string;
     topDirector: string;
     mostWatchedGenre: string;
