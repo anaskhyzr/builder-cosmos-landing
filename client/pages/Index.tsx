@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import { Search, Bell, User } from "lucide-react";
-import FeaturedMovie from "../components/FeaturedMovie";
+import React, { useState, useEffect } from "react";
+import { Search } from "lucide-react";
 import MovieCard from "../components/MovieCard";
-import {
-  getFeaturedMovie,
-  sampleMovies,
-  categories,
-  getContinueWatching,
-} from "../lib/movie-data";
+import { sampleMovies } from "../lib/movie-data";
 import { useAppContext } from "../lib/app-context";
 
 interface HomePageProps {
@@ -16,199 +10,190 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
   const { state } = useAppContext();
-  const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
-  const featuredMovie = getFeaturedMovie();
-  const continueWatching = getContinueWatching();
+  // Debounce search query for better performance
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 300);
 
-  const filteredMovies = sampleMovies.filter((movie) => {
-    const matchesSearch = movie.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "all" || movie.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  // Get popular movies for default state (top rated movies)
+  const popularMovies = sampleMovies
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 4);
+
+  // Filter movies based on search query
+  const searchResults = sampleMovies.filter(
+    (movie) =>
+      movie.title.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+      movie.genre.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+      movie.year.toString().includes(debouncedSearchQuery),
+  );
+
+  const handleSearchFocus = () => {
+    setIsSearchActive(true);
+  };
+
+  const handleSearchBlur = () => {
+    if (!searchQuery) {
+      setIsSearchActive(false);
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (value) {
+      setIsSearchActive(true);
+    } else {
+      setIsSearchActive(false);
+    }
+  };
 
   return (
     <div className="flex-1 bg-background min-h-screen">
-      {/* Header */}
-      <header className="glass-card m-6 mb-0">
-        <div className="flex items-center justify-between p-6">
-          {/* Search */}
-          <div className="flex-1 max-w-xl">
+      <div className="container mx-auto px-6 py-12">
+        {/* Centered Search Section */}
+        <div className="flex flex-col items-center justify-center min-h-[40vh] space-y-8">
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+              Discover Movies
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl">
+              Search through thousands of movies and find your next favorite
+            </p>
+          </div>
+
+          {/* Centered Search Bar */}
+          <div className="w-full max-w-2xl">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search movies"
+                placeholder="Search for movies, genres, or years..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-input border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:bg-background-secondary transition-all"
+                onChange={handleSearchChange}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
+                className="w-full pl-16 pr-6 py-6 bg-glass/40 backdrop-blur-xl border border-glass-border/30 rounded-2xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:bg-glass/60 transition-all duration-300 text-lg shadow-2xl"
               />
             </div>
           </div>
-
-          {/* Right Actions */}
-          <div className="flex items-center gap-4 ml-6">
-            <button className="glass-button p-3 rounded-xl">
-              <Bell className="w-5 h-5 text-foreground" />
-            </button>
-            <button className="glass-button p-3 rounded-xl">
-              <User className="w-5 h-5 text-foreground" />
-            </button>
-          </div>
         </div>
 
-        {/* Category Navigation */}
-        <div className="px-6 pb-6">
-          <nav className="flex items-center gap-6">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.value)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                  selectedCategory === category.value
-                    ? "text-primary bg-primary/10 border border-primary/30"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </header>
+        {/* Search Results or Popular Movies */}
+        <div className="mt-12">
+          {isSearchActive && debouncedSearchQuery ? (
+            // Search Results
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-foreground mb-2">
+                  Search Results
+                </h2>
+                <p className="text-muted-foreground">
+                  {searchResults.length}{" "}
+                  {searchResults.length === 1 ? "movie" : "movies"} found for "
+                  {debouncedSearchQuery}"
+                </p>
+              </div>
 
-      {/* Main Content */}
-      <main className="p-6 space-y-8">
-        {/* Featured Movie */}
-        {featuredMovie && !searchQuery && (
-          <section>
-            <FeaturedMovie
-              movie={featuredMovie}
-              onWatch={(movie) => onMovieClick?.(movie)}
-            />
-          </section>
-        )}
-
-        {/* Continue Watching */}
-        {continueWatching.length > 0 && !searchQuery && (
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-foreground">
-                Continue Watching
-              </h2>
-              <button className="text-primary hover:text-primary-hover font-medium">
-                See all
-              </button>
-            </div>
-            <div className="flex gap-6 overflow-x-auto pb-4 custom-scrollbar">
-              {continueWatching.map((movie) => (
-                <div key={movie.id} className="flex-shrink-0">
-                  <MovieCard
-                    movie={movie}
-                    onClick={onMovieClick}
-                    size="medium"
-                    showProgress={true}
-                  />
+              {searchResults.length === 0 ? (
+                <div className="glass-card p-12 text-center">
+                  <div className="w-24 h-24 mx-auto mb-6 bg-glass rounded-full flex items-center justify-center">
+                    <Search className="w-12 h-12 text-muted-foreground" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    No movies found
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Try searching with different keywords or check your spelling
+                  </p>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* You Might Like / Search Results */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">
-              {searchQuery ? "Search Results" : "You might like"}
-            </h2>
-            {!searchQuery && (
-              <button className="text-primary hover:text-primary-hover font-medium">
-                See all
-              </button>
-            )}
-          </div>
-
-          {filteredMovies.length === 0 ? (
-            <div className="glass-card p-12 text-center">
-              <p className="text-muted-foreground text-lg">
-                {searchQuery
-                  ? `No movies found for "${searchQuery}"`
-                  : "No movies available"}
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {filteredMovies.slice(0, 12).map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  onClick={onMovieClick}
-                  size="medium"
-                />
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Trending Now */}
-        {!searchQuery && (
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-foreground">
-                Trending Now
-              </h2>
-              <button className="text-primary hover:text-primary-hover font-medium">
-                See all
-              </button>
-            </div>
-            <div className="flex gap-6 overflow-x-auto pb-4 custom-scrollbar">
-              {sampleMovies
-                .filter((movie) => movie.trending)
-                .map((movie) => (
-                  <div key={movie.id} className="flex-shrink-0">
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                  {searchResults.map((movie) => (
                     <MovieCard
+                      key={movie.id}
                       movie={movie}
                       onClick={onMovieClick}
-                      size="large"
+                      size="medium"
                     />
-                  </div>
-                ))}
+                  ))}
+                </div>
+              )}
             </div>
-          </section>
-        )}
+          ) : (
+            // Popular Movies (Default State)
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-foreground mb-2">
+                  Popular Movies
+                </h2>
+                <p className="text-muted-foreground">
+                  Start typing to search or explore these popular picks
+                </p>
+              </div>
 
-        {/* Popular This Week */}
-        {!searchQuery && (
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-foreground">
-                Popular This Week
-              </h2>
-              <button className="text-primary hover:text-primary-hover font-medium">
-                See all
-              </button>
+              <div className="flex justify-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
+                  {popularMovies.map((movie) => (
+                    <div
+                      key={movie.id}
+                      className="transform hover:scale-105 transition-all duration-300"
+                    >
+                      <MovieCard
+                        movie={movie}
+                        onClick={onMovieClick}
+                        size="medium"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {sampleMovies
-                .slice()
-                .reverse()
-                .slice(0, 6)
-                .map((movie) => (
-                  <MovieCard
-                    key={movie.id}
-                    movie={movie}
-                    onClick={onMovieClick}
-                    size="medium"
-                  />
-                ))}
+          )}
+        </div>
+
+        {/* Search Tips */}
+        {!isSearchActive && (
+          <div className="mt-16">
+            <div className="glass-card p-8 text-center">
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                Search Tips
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-muted-foreground">
+                <div className="space-y-2">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+                    <Search className="w-6 h-6 text-primary" />
+                  </div>
+                  <p className="font-medium">By Title</p>
+                  <p className="text-sm">Search for movie names</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+                    <span className="text-primary font-bold">🎭</span>
+                  </div>
+                  <p className="font-medium">By Genre</p>
+                  <p className="text-sm">Find movies by genre</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+                    <span className="text-primary font-bold">📅</span>
+                  </div>
+                  <p className="font-medium">By Year</p>
+                  <p className="text-sm">Search by release year</p>
+                </div>
+              </div>
             </div>
-          </section>
+          </div>
         )}
-      </main>
+      </div>
     </div>
   );
 };
