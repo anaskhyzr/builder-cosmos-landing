@@ -85,30 +85,33 @@ const HomePage: React.FC<HomePageProps> = ({ onMovieClick }) => {
         </div>
 
         {/* Search Results or Popular Movies */}
-        <div className="mt-8">
+        <div className="mt-12">
           {isSearchActive && debouncedSearchQuery ? (
             // Search Results
-            <div className="space-y-6">
-              <div className="text-center">
-                <h2 className="text-xl font-bold text-foreground">
-                  {searchResults.length} Results
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-light text-foreground/80 mb-1">
+                  Search Results
                 </h2>
+                <p className="text-sm text-foreground/50">
+                  {searchResults.length} movies found
+                </p>
               </div>
 
               {searchResults.length === 0 ? (
-                <div className="glass-card p-12 text-center">
-                  <div className="w-24 h-24 mx-auto mb-6 bg-glass rounded-full flex items-center justify-center">
-                    <Search className="w-12 h-12 text-muted-foreground" />
+                <div className="glass-card p-16 text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-white/5 rounded-2xl flex items-center justify-center">
+                    <Search className="w-10 h-10 text-foreground/30" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-lg font-medium text-foreground/80 mb-2">
                     No movies found
                   </h3>
-                  <p className="text-muted-foreground">
-                    Try searching with different keywords or check your spelling
+                  <p className="text-foreground/50 text-sm">
+                    Try different keywords or check your spelling
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-6">
                   {searchResults.map((movie) => (
                     <MovieCard
                       key={movie.id}
