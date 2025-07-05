@@ -1125,9 +1125,6 @@ const EnhancedSocialPage: React.FC = () => {
                   className="pl-10 pr-4 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
                 />
               </div>
-              <button className="glass-button p-2 rounded-lg">
-                <Settings className="w-5 h-5" />
-              </button>
             </div>
           </div>
 
