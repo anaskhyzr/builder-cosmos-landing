@@ -72,20 +72,7 @@ export const sampleMovies: Movie[] = [
     duration: "2h 49m",
     category: "movie",
   },
-  {
-    id: 6,
-    title: "Dark Season 3",
-    year: 2020,
-    rating: 8.8,
-    genre: "Drama, Mystery, Sci-Fi",
-    poster:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=450&fit=crop",
-    description:
-      "The time-twisting madness reaches its conclusion in a strange new world.",
-    duration: "60m",
-    category: "tv",
-    progress: 45,
-  },
+
   {
     id: 7,
     title: "Transformers: Rise of the Beasts",
