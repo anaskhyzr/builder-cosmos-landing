@@ -23,6 +23,8 @@ import {
   Save,
   Globe,
   Camera,
+  Lock,
+  Smartphone,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 import MovieCard from "../components/MovieCard";
@@ -61,16 +63,21 @@ const ProfilePage: React.FC = () => {
       newSuggestions: true,
       socialActivity: false,
       weeklyDigest: true,
+      movieReleases: true,
+      emailNotifications: true,
     },
     privacy: {
       profileVisible: true,
       watchHistoryVisible: true,
       showOnlineStatus: true,
+      allowFriendRequests: true,
     },
     ai: {
       suggestionsEnabled: true,
       moodBasedSuggestions: true,
+      timeBasedSuggestions: true,
       trendingWeight: 30,
+      genreWeight: 70,
     },
   });
 
@@ -89,9 +96,9 @@ const ProfilePage: React.FC = () => {
       const moods = ["Energetic", "Relaxed", "Thoughtful"];
 
       return {
-        totalWatchTime: Math.floor(Math.random() * 200) + 100, // 100-300 hours
-        averageRating: Number((Math.random() * 2 + 3).toFixed(1)), // 3.0-5.0
-        watchingStreak: Math.floor(Math.random() * 30) + 5, // 5-35 days
+        totalWatchTime: Math.floor(Math.random() * 200) + 100,
+        averageRating: Number((Math.random() * 2 + 3).toFixed(1)),
+        watchingStreak: Math.floor(Math.random() * 30) + 5,
         topGenres: genres
           .map((genre, index) => ({
             genre,
@@ -141,6 +148,377 @@ const ProfilePage: React.FC = () => {
         } top-0.5`}
       />
     </button>
+  );
+
+  const handleSave = () => {
+    // Simulate save functionality
+    console.log("Settings saved", preferences, profileForm);
+  };
+
+  const renderOverview = () => (
+    <>
+      {/* Stats Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="glass-card p-6 text-center">
+          <Film className="w-8 h-8 text-primary mx-auto mb-3" />
+          <div className="text-3xl font-bold text-primary mb-2">
+            {state.watchedMovies.length}
+          </div>
+          <div className="text-muted-foreground">Movies Watched</div>
+        </div>
+        <div className="glass-card p-6 text-center">
+          <Heart className="w-8 h-8 text-red-500 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-primary mb-2">
+            {state.watchlist.length}
+          </div>
+          <div className="text-muted-foreground">Watchlist</div>
+        </div>
+        <div className="glass-card p-6 text-center">
+          <Clock className="w-8 h-8 text-green-500 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-primary mb-2">
+            {analytics?.totalWatchTime || 0}h
+          </div>
+          <div className="text-muted-foreground">Watch Time</div>
+        </div>
+        <div className="glass-card p-6 text-center">
+          <Zap className="w-8 h-8 text-orange-500 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-primary mb-2">
+            {analytics?.watchingStreak || 0}
+          </div>
+          <div className="text-muted-foreground">Day Streak</div>
+        </div>
+      </div>
+
+      {/* Recent Activity */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6">
+          Recent Activity
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {state.watchedMovies.slice(0, 6).map((movie) => (
+            <MovieCard key={movie.id} movie={movie} size="small" />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+
+  const renderAnalytics = () => (
+    <>
+      {/* Key Insights Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="glass-card p-6 text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5">
+          <Star className="w-8 h-8 text-yellow-500 mx-auto mb-3" />
+          <div className="text-2xl font-bold text-foreground mb-1">
+            {analytics?.averageRating || 0}
+          </div>
+          <div className="text-sm text-muted-foreground">Average Rating</div>
+        </div>
+        <div className="glass-card p-6 text-center bg-gradient-to-br from-green-500/10 to-green-500/5">
+          <TrendingUp className="w-8 h-8 text-green-500 mx-auto mb-3" />
+          <div className="text-2xl font-bold text-foreground mb-1">
+            {analytics?.yearStats.totalMovies || 0}
+          </div>
+          <div className="text-sm text-muted-foreground">This Year</div>
+        </div>
+        <div className="glass-card p-6 text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5">
+          <Activity className="w-8 h-8 text-purple-500 mx-auto mb-3" />
+          <div className="text-2xl font-bold text-foreground mb-1">
+            {analytics?.topGenres[0]?.genre || "N/A"}
+          </div>
+          <div className="text-sm text-muted-foreground">Top Genre</div>
+        </div>
+        <div className="glass-card p-6 text-center bg-gradient-to-br from-orange-500/10 to-orange-500/5">
+          <Target className="w-8 h-8 text-orange-500 mx-auto mb-3" />
+          <div className="text-2xl font-bold text-foreground mb-1">
+            {analytics?.yearStats.topActor.split(" ")[0] || "N/A"}
+          </div>
+          <div className="text-sm text-muted-foreground">Favorite Actor</div>
+        </div>
+      </div>
+
+      {/* Genre Distribution */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
+          <BarChart3 className="w-5 h-5 text-primary" />
+          Genre Preferences
+        </h3>
+        <div className="space-y-4">
+          {analytics?.topGenres.slice(0, 5).map((genre, index) => (
+            <div key={genre.genre} className="flex items-center gap-4">
+              <div className="w-8 text-center font-semibold text-muted-foreground">
+                #{index + 1}
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between mb-2">
+                  <span className="font-medium text-foreground">
+                    {genre.genre}
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    {genre.count} movies • {genre.percentage}%
+                  </span>
+                </div>
+                <div className="w-full bg-glass rounded-full h-2">
+                  <div
+                    className="bg-gradient-to-r from-primary to-primary-hover h-2 rounded-full transition-all"
+                    style={{ width: `${genre.percentage}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Monthly Activity Chart */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
+          <Activity className="w-5 h-5 text-primary" />
+          Monthly Activity
+        </h3>
+        <div className="flex items-end gap-2 h-32 overflow-x-auto">
+          {analytics?.monthlyActivity.map((month) => (
+            <div
+              key={month.month}
+              className="flex flex-col items-center gap-2 min-w-0"
+            >
+              <div
+                className="bg-gradient-to-t from-primary to-primary-hover rounded-t-lg w-8 transition-all hover:opacity-80"
+                style={{
+                  height: `${(month.watched / 15) * 80}px`,
+                  minHeight: "8px",
+                }}
+                title={`${month.watched} movies watched`}
+              />
+              <span className="text-xs text-muted-foreground">
+                {month.month}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+
+  const renderSettings = () => (
+    <>
+      {/* Account Settings */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
+          <User className="w-5 h-5 text-primary" />
+          Account Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-2">
+              Full Name
+            </label>
+            <input
+              type="text"
+              value={profileForm.name}
+              onChange={(e) =>
+                setProfileForm({ ...profileForm, name: e.target.value })
+              }
+              className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-2">
+              Username
+            </label>
+            <input
+              type="text"
+              value={profileForm.username}
+              onChange={(e) =>
+                setProfileForm({ ...profileForm, username: e.target.value })
+              }
+              className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              value={profileForm.email}
+              onChange={(e) =>
+                setProfileForm({ ...profileForm, email: e.target.value })
+              }
+              className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-2">
+              Bio
+            </label>
+            <textarea
+              value={profileForm.bio}
+              onChange={(e) =>
+                setProfileForm({ ...profileForm, bio: e.target.value })
+              }
+              className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground focus:outline-none focus:border-primary resize-none"
+              rows={3}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Notification Settings */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
+          <Bell className="w-5 h-5 text-primary" />
+          Notifications
+        </h3>
+        <div className="space-y-4">
+          {Object.entries(preferences.notifications).map(([key, value]) => (
+            <div key={key} className="flex items-center justify-between">
+              <div>
+                <div className="font-medium text-foreground capitalize">
+                  {key.replace(/([A-Z])/g, " $1")}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Get notified about {key.toLowerCase()}
+                </div>
+              </div>
+              {renderToggle(value, () =>
+                setPreferences((prev) => ({
+                  ...prev,
+                  notifications: {
+                    ...prev.notifications,
+                    [key]: !value,
+                  },
+                })),
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Privacy Settings */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
+          <Shield className="w-5 h-5 text-primary" />
+          Privacy & Security
+        </h3>
+        <div className="space-y-4">
+          {Object.entries(preferences.privacy).map(([key, value]) => (
+            <div key={key} className="flex items-center justify-between">
+              <div>
+                <div className="font-medium text-foreground capitalize">
+                  {key.replace(/([A-Z])/g, " $1")}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Control your {key.toLowerCase()} settings
+                </div>
+              </div>
+              {renderToggle(value, () =>
+                setPreferences((prev) => ({
+                  ...prev,
+                  privacy: {
+                    ...prev.privacy,
+                    [key]: !value,
+                  },
+                })),
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* AI Settings */}
+      <div className="glass-card p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
+          <Brain className="w-5 h-5 text-primary" />
+          AI Recommendations
+        </h3>
+        <div className="space-y-6">
+          {Object.entries(preferences.ai)
+            .filter(
+              ([key]) =>
+                typeof preferences.ai[key as keyof typeof preferences.ai] ===
+                "boolean",
+            )
+            .map(([key, value]) => (
+              <div key={key} className="flex items-center justify-between">
+                <div>
+                  <div className="font-medium text-foreground capitalize">
+                    {key.replace(/([A-Z])/g, " $1")}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Enable {key.toLowerCase()} for better recommendations
+                  </div>
+                </div>
+                {renderToggle(value as boolean, () =>
+                  setPreferences((prev) => ({
+                    ...prev,
+                    ai: {
+                      ...prev.ai,
+                      [key]: !value,
+                    },
+                  })),
+                )}
+              </div>
+            ))}
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Trending Weight: {preferences.ai.trendingWeight}%
+              </label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={preferences.ai.trendingWeight}
+                onChange={(e) =>
+                  setPreferences((prev) => ({
+                    ...prev,
+                    ai: {
+                      ...prev.ai,
+                      trendingWeight: parseInt(e.target.value),
+                    },
+                  }))
+                }
+                className="w-full"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Genre Weight: {preferences.ai.genreWeight}%
+              </label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={preferences.ai.genreWeight}
+                onChange={(e) =>
+                  setPreferences((prev) => ({
+                    ...prev,
+                    ai: {
+                      ...prev.ai,
+                      genreWeight: parseInt(e.target.value),
+                    },
+                  }))
+                }
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Save Button */}
+      <div className="flex justify-end">
+        <button
+          onClick={handleSave}
+          className="bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2"
+        >
+          <Save className="w-4 h-4" />
+          Save Changes
+        </button>
+      </div>
+    </>
   );
 
   return (
@@ -212,267 +590,9 @@ const ProfilePage: React.FC = () => {
         </div>
 
         {/* Tab Content */}
-        {activeTab === "overview" && (
-          <>
-            {/* Enhanced Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="glass-card p-6 text-center">
-            <Film className="w-8 h-8 text-primary mx-auto mb-3" />
-            <div className="text-3xl font-bold text-primary mb-2">
-              {state.watchedMovies.length}
-            </div>
-            <div className="text-muted-foreground">Movies Watched</div>
-          </div>
-          <div className="glass-card p-6 text-center">
-            <Heart className="w-8 h-8 text-red-500 mx-auto mb-3" />
-            <div className="text-3xl font-bold text-primary mb-2">
-              {state.watchlist.length}
-            </div>
-            <div className="text-muted-foreground">Watchlist</div>
-          </div>
-          <div className="glass-card p-6 text-center">
-            <Clock className="w-8 h-8 text-green-500 mx-auto mb-3" />
-            <div className="text-3xl font-bold text-primary mb-2">
-              {analytics?.totalWatchTime || 0}h
-            </div>
-            <div className="text-muted-foreground">Watch Time</div>
-          </div>
-          <div className="glass-card p-6 text-center">
-            <Zap className="w-8 h-8 text-orange-500 mx-auto mb-3" />
-            <div className="text-3xl font-bold text-primary mb-2">
-              {analytics?.watchingStreak || 0}
-            </div>
-            <div className="text-muted-foreground">Day Streak</div>
-          </div>
-        </div>
-
-        {/* Detailed Analytics Section */}
-        {analytics && (
-          <div className="space-y-6">
-            {/* Analytics Header */}
-            <div className="glass-card p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <BarChart3 className="w-6 h-6 text-primary" />
-                <h2 className="text-2xl font-bold text-foreground">
-                  Your Movie Analytics
-                </h2>
-              </div>
-              <p className="text-muted-foreground">
-                Insights into your viewing patterns and preferences
-              </p>
-            </div>
-
-            {/* Key Insights Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="glass-card p-6 text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5">
-                <Star className="w-8 h-8 text-yellow-500 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-foreground mb-1">
-                  {analytics.averageRating}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Average Rating
-                </div>
-              </div>
-              <div className="glass-card p-6 text-center bg-gradient-to-br from-green-500/10 to-green-500/5">
-                <TrendingUp className="w-8 h-8 text-green-500 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-foreground mb-1">
-                  {analytics.yearStats.totalMovies}
-                </div>
-                <div className="text-sm text-muted-foreground">This Year</div>
-              </div>
-              <div className="glass-card p-6 text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5">
-                <Activity className="w-8 h-8 text-purple-500 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-foreground mb-1">
-                  {analytics.topGenres[0]?.genre || "N/A"}
-                </div>
-                <div className="text-sm text-muted-foreground">Top Genre</div>
-              </div>
-              <div className="glass-card p-6 text-center bg-gradient-to-br from-orange-500/10 to-orange-500/5">
-                <Target className="w-8 h-8 text-orange-500 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-foreground mb-1">
-                  {analytics.yearStats.topActor.split(" ")[0]}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Favorite Actor
-                </div>
-              </div>
-            </div>
-
-            {/* Genre Distribution */}
-            <div className="glass-card p-6">
-              <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
-                <BarChart3 className="w-5 h-5 text-primary" />
-                Genre Preferences
-              </h3>
-              <div className="space-y-4">
-                {analytics.topGenres.slice(0, 5).map((genre, index) => (
-                  <div key={genre.genre} className="flex items-center gap-4">
-                    <div className="w-8 text-center font-semibold text-muted-foreground">
-                      #{index + 1}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between mb-2">
-                        <span className="font-medium text-foreground">
-                          {genre.genre}
-                        </span>
-                        <span className="text-sm text-muted-foreground">
-                          {genre.count} movies • {genre.percentage}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-glass rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-primary to-primary-hover h-2 rounded-full transition-all"
-                          style={{ width: `${genre.percentage}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Monthly Activity & Mood Patterns */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Monthly Activity Chart */}
-              <div className="glass-card p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
-                  <Activity className="w-5 h-5 text-primary" />
-                  Monthly Activity
-                </h3>
-                <div className="flex items-end gap-2 h-32 overflow-x-auto">
-                  {analytics.monthlyActivity.map((month) => (
-                    <div
-                      key={month.month}
-                      className="flex flex-col items-center gap-2 min-w-0"
-                    >
-                      <div
-                        className="bg-gradient-to-t from-primary to-primary-hover rounded-t-lg w-8 transition-all hover:opacity-80"
-                        style={{
-                          height: `${(month.watched / 15) * 80}px`,
-                          minHeight: "8px",
-                        }}
-                        title={`${month.watched} movies watched`}
-                      />
-                      <span className="text-xs text-muted-foreground">
-                        {month.month}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Mood Patterns */}
-              <div className="glass-card p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-3">
-                  <Users className="w-5 h-5 text-primary" />
-                  Viewing Moods
-                </h3>
-                <div className="space-y-4">
-                  {analytics.moodPatterns.map((pattern) => (
-                    <div
-                      key={pattern.mood}
-                      className="flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 bg-primary rounded-full" />
-                        <span className="font-medium text-foreground">
-                          {pattern.mood}
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium text-foreground">
-                          {pattern.count} movies
-                        </div>
-                        <div className="text-xs text-muted-foreground flex items-center gap-1">
-                          <Star className="w-3 h-3" />
-                          {pattern.avgRating} avg
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Year in Review Highlights */}
-            <div className="glass-card p-8 bg-gradient-to-br from-primary/10 to-primary/5">
-              <div className="text-center mb-6">
-                <Award className="w-12 h-12 text-primary mx-auto mb-3" />
-                <h3 className="text-2xl font-bold text-foreground mb-2">
-                  2024 Highlights
-                </h3>
-                <p className="text-muted-foreground">
-                  Your movie journey this year
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary mb-1">
-                    {analytics.yearStats.totalMovies}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Movies</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary mb-1">
-                    {analytics.yearStats.totalShows}
-                  </div>
-                  <div className="text-sm text-muted-foreground">TV Shows</div>
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-primary mb-1">
-                    {analytics.yearStats.topActor}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Top Actor</div>
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-primary mb-1">
-                    {analytics.yearStats.topDirector}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Top Director
-                  </div>
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-primary mb-1">
-                    {analytics.yearStats.mostWatchedGenre}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Favorite Genre
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Watchlist */}
-        {state.watchlist.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-bold text-foreground mb-6">
-              My Watchlist
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {state.watchlist.slice(0, 6).map((movie) => (
-                <MovieCard key={movie.id} movie={movie} size="medium" />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Recently Watched */}
-        {state.watchedMovies.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-bold text-foreground mb-6">
-              Recently Watched
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {state.watchedMovies.slice(0, 6).map((movie) => (
-                <MovieCard key={movie.id} movie={movie} size="medium" />
-              ))}
-            </div>
-          </section>
-        )}
+        {activeTab === "overview" && renderOverview()}
+        {activeTab === "analytics" && renderAnalytics()}
+        {activeTab === "settings" && renderSettings()}
       </div>
     </div>
   );
