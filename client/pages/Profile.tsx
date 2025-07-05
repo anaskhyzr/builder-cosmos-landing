@@ -162,14 +162,29 @@ const ProfilePage: React.FC = () => {
               )}
             </div>
             <div className="flex-1">
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center justify-between mb-4">
                 <h1 className="text-3xl font-bold text-foreground">
                   {state.user?.name}
                 </h1>
-                <button className="glass-button px-4 py-2 rounded-lg flex items-center gap-2">
-                  <Edit className="w-4 h-4" />
-                  Edit Profile
-                </button>
+                <div className="flex items-center gap-2">
+                  {tabs.map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${
+                          activeTab === tab.id
+                            ? "bg-primary/20 text-primary border border-primary/30"
+                            : "text-muted-foreground hover:text-foreground hover:bg-glass/30"
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
               <p className="text-lg text-muted-foreground mb-4">
                 @{state.user?.username}
