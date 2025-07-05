@@ -48,14 +48,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   const sizeClasses = {
-    small: "w-36",
-    medium: "w-48",
-    large: "w-56",
+    small: "w-44",
+    medium: "w-56",
+    large: "w-64",
   };
 
   const imageHeightClasses = {
-    small: "h-48",
-    medium: "h-64",
+    small: "h-56",
+    medium: "h-72",
     large: "h-80",
   };
 
