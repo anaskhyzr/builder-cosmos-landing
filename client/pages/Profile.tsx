@@ -117,7 +117,6 @@ const ProfilePage: React.FC = () => {
         yearStats: {
           totalMovies:
             state.watchedMovies.length + Math.floor(Math.random() * 50) + 30,
-          totalShows: Math.floor(Math.random() * 20) + 10,
           topActor: "Leonardo DiCaprio",
           topDirector: "Christopher Nolan",
           mostWatchedGenre: "Drama",
