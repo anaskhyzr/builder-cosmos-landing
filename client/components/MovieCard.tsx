@@ -142,23 +142,6 @@ const MovieCard: React.FC<MovieCardProps> = ({
             </div>
           )}
         </div>
-
-        {/* Rating Badge */}
-        <div className="absolute top-3 left-3">
-          <div className="glass px-2 py-1 rounded-lg flex items-center gap-1">
-            <Star className="w-3 h-3 text-yellow-400" fill="currentColor" />
-            <span className="text-xs font-medium text-white">
-              {movie.rating}
-            </span>
-          </div>
-        </div>
-
-        {/* Category Badge */}
-        <div className="absolute bottom-3 left-3">
-          <span className="glass px-2 py-1 rounded-lg text-xs font-medium text-white/90 uppercase">
-            {movie.category}
-          </span>
-        </div>
       </div>
 
       {/* Movie Info */}
