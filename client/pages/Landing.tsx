@@ -13,6 +13,7 @@ import {
   Globe,
   Shield,
 } from "lucide-react";
+import Logo from "../components/Logo";
 
 interface LandingPageProps {
   onGetStarted: () => void;
