@@ -60,6 +60,10 @@ const AppContent: React.FC = () => {
     setCurrentPage("login");
   };
 
+  const handleBack = () => {
+    setCurrentPage("home");
+  };
+
   // If not authenticated, show landing page or login
   if (!state.isAuthenticated) {
     if (currentPage === "login") {
