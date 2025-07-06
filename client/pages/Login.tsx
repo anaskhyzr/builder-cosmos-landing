@@ -72,17 +72,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onBack }) => {
 
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-hover rounded-xl flex items-center justify-center">
-              <Film className="w-7 h-7 text-white" />
-            </div>
-            <div className="text-left">
-              <h1 className="text-2xl font-bold text-foreground">
-                CineTracker
-              </h1>
-              <p className="text-sm text-muted-foreground">AI Movie Tracker</p>
-            </div>
-          </div>
+          <Logo size="medium" showText={true} className="justify-center" />
         </div>
 
         {/* Form Container */}
