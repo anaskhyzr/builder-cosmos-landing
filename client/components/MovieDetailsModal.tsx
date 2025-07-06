@@ -142,12 +142,16 @@ const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
     <div className="fixed inset-0 z-50">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/30 backdrop-blur-sm md:bg-transparent"
         onClick={onClose}
       />
 
       {/* Modal Content */}
-      <div className="absolute md:right-0 md:top-0 md:h-full md:w-96 lg:w-[28rem] bottom-0 left-0 right-0 md:bottom-auto max-h-[85vh] md:max-h-full bg-background-secondary/95 backdrop-blur-xl border-l border-border/30 md:border-l md:border-t-0 border-t md:rounded-none rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out">
+      <div className={`absolute md:right-0 md:top-0 md:h-full md:w-[28rem] lg:w-[32rem] bottom-0 left-0 right-0 md:bottom-auto max-h-[85vh] md:max-h-full bg-background-secondary/98 backdrop-blur-xl border-l border-white/10 md:border-l md:border-t-0 border-t md:rounded-none rounded-t-2xl shadow-2xl transform transition-all duration-300 ease-out ${
+        isOpen
+          ? "translate-x-0 md:translate-x-0"
+          : "translate-y-full md:translate-y-0 md:translate-x-full"
+      }`}
         {/* Close Button */}
         <button
           onClick={onClose}
