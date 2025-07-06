@@ -25,6 +25,7 @@ import {
   Camera,
   Lock,
   Smartphone,
+  LogOut,
 } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 import MovieCard from "../components/MovieCard";
