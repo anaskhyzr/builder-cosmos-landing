@@ -13,8 +13,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onBack }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "admin",
+    password: "admin",
     name: "",
     username: "",
   });
