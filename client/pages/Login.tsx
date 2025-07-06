@@ -67,6 +67,17 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onBack }) => {
       </div>
 
       <div className="relative w-full max-w-md">
+        {/* Back Button */}
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="mb-6 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to home
+          </button>
+        )}
+
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
