@@ -148,10 +148,10 @@ const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
 
       {/* Modal Content */}
       <div
-        className={`absolute md:right-0 md:top-0 md:h-full md:w-[28rem] lg:w-[32rem] bottom-0 left-0 right-0 md:bottom-auto max-h-[85vh] md:max-h-full bg-background-secondary/98 backdrop-blur-xl border-l border-white/10 md:border-l md:border-t-0 border-t md:rounded-none rounded-t-2xl shadow-2xl transform transition-all duration-300 ease-out ${
-          isOpen
-            ? "translate-x-0 md:translate-x-0"
-            : "translate-y-full md:translate-y-0 md:translate-x-full"
+        className={`absolute right-0 top-0 h-full w-full md:w-[28rem] lg:w-[32rem] md:max-w-[28rem] lg:max-w-[32rem] bg-background-secondary/98 backdrop-blur-xl border-l border-white/10 shadow-2xl transform transition-all duration-300 ease-out md:rounded-none rounded-t-2xl md:rounded-none ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } md:translate-y-0 ${
+          isOpen ? "md:translate-x-0" : "md:translate-x-full"
         }`}
       >
         {/* Close Button */}
