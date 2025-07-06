@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import {
-  Film,
-  Eye,
-  EyeOff,
-  Mail,
-  Lock,
-  User,
-  ArrowLeft,
-  Sparkles,
-} from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, ArrowLeft } from "lucide-react";
 import { useAppContext } from "../lib/app-context";
+import Logo from "../components/Logo";
 
 interface LoginPageProps {
   onLogin?: () => void;
