@@ -46,7 +46,7 @@ interface ProfileAnalytics {
 }
 
 const ProfilePage: React.FC = () => {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const [analytics, setAnalytics] = useState<ProfileAnalytics | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [profileForm, setProfileForm] = useState({
