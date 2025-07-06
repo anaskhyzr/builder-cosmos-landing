@@ -1,9 +1,19 @@
 import React, { useState } from "react";
-import { Film, Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import {
+  Film,
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  ArrowLeft,
+  Sparkles,
+} from "lucide-react";
 import { useAppContext } from "../lib/app-context";
 
 interface LoginPageProps {
   onLogin?: () => void;
+  onBack?: () => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
