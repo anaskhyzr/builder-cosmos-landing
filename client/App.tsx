@@ -99,8 +99,16 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Main Content */}
-      <main className="pb-24">{renderPage()}</main>
+      {/* Main Content with squeeze effect */}
+      <main
+        className={`pb-24 transition-all duration-300 ease-out ${
+          state.showMovieModal
+            ? "md:mr-[28rem] lg:mr-[32rem] transform md:scale-[0.98]"
+            : ""
+        }`}
+      >
+        {renderPage()}
+      </main>
 
       {/* Bottom Navigation */}
       <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
