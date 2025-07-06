@@ -106,13 +106,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
         {/* Hero Content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <div className="glass-card mb-8">
-            <div className="flex items-center justify-center mb-6">
+            <div className="flex items-center justify-center mb-8">
               <div className="relative">
-                <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center backdrop-blur-xl border border-primary/30">
-                  <Play className="w-8 h-8 text-primary fill-current" />
+                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-hover rounded-2xl flex items-center justify-center backdrop-blur-xl border border-primary/30 shadow-2xl">
+                  <Play className="w-10 h-10 text-white fill-current" />
                 </div>
-                <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                  <Sparkles className="w-3 h-3 text-white" />
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                  <Sparkles className="w-4 h-4 text-white" />
                 </div>
               </div>
             </div>
