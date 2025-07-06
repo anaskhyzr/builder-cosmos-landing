@@ -111,7 +111,13 @@ const AppContent: React.FC = () => {
       </main>
 
       {/* Bottom Navigation */}
-      <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
+      <div
+        className={`transition-all duration-300 ease-out ${
+          state.showMovieModal ? "md:mr-[28rem] lg:mr-[32rem]" : ""
+        }`}
+      >
+        <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
+      </div>
 
       {/* Movie Details Modal */}
       <MovieDetailsModal
