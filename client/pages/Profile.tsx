@@ -154,6 +154,15 @@ const ProfilePage: React.FC = () => {
     console.log("Settings saved", preferences, profileForm);
   };
 
+  const handleLogout = () => {
+    // Clear authentication state
+    dispatch({ type: "SET_AUTH_STATE", payload: false });
+    dispatch({ type: "SET_USER", payload: null });
+    // Clear any stored data if needed
+    localStorage.removeItem("user");
+    localStorage.removeItem("authToken");
+  };
+
   const renderOverview = () => (
     <>
       {/* Stats Grid */}
