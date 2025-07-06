@@ -335,13 +335,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       <footer className="py-12 px-6 border-t border-border/30">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center gap-3 mb-4 md:mb-0">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-hover rounded-xl flex items-center justify-center shadow-lg">
-                <Play className="w-5 h-5 text-white fill-current" />
-              </div>
-              <span className="text-xl font-bold text-foreground">
-                CineTracker
-              </span>
+            <div className="mb-4 md:mb-0">
+              <Logo size="small" showText={true} />
             </div>
 
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
