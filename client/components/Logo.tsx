@@ -57,58 +57,74 @@ const Logo: React.FC<LogoProps> = ({
             strokeWidth="3"
           />
 
-          {/* Computer Monitor */}
+          {/* Cinema Screen */}
           <rect
             x="12"
             y="32"
-            width="38"
-            height="28"
-            rx="4"
+            width="45"
+            height="25"
+            rx="3"
             fill="none"
             stroke="#8B5CF6"
             strokeWidth="3"
           />
 
-          {/* Monitor Screen */}
+          {/* Screen Content */}
           <rect
             x="15"
             y="35"
-            width="32"
-            height="20"
+            width="39"
+            height="19"
             rx="2"
-            fill="none"
-            stroke="#8B5CF6"
-            strokeWidth="2"
+            fill="#8B5CF6"
+            fillOpacity="0.1"
           />
 
           {/* Film Strip (left side of screen) */}
-          <rect x="16" y="36" width="4" height="18" fill="#8B5CF6" rx="1" />
+          <rect x="16" y="36" width="4" height="17" fill="#8B5CF6" rx="1" />
           <rect x="17" y="38" width="2" height="2" fill="white" rx="0.5" />
           <rect x="17" y="41" width="2" height="2" fill="white" rx="0.5" />
           <rect x="17" y="44" width="2" height="2" fill="white" rx="0.5" />
           <rect x="17" y="47" width="2" height="2" fill="white" rx="0.5" />
           <rect x="17" y="50" width="2" height="2" fill="white" rx="0.5" />
 
-          {/* Monitor Stand */}
+          {/* Cinema Projector */}
           <rect
-            x="28"
-            y="60"
-            width="6"
-            height="10"
+            x="10"
+            y="62"
+            width="16"
+            height="8"
+            rx="3"
             fill="none"
             stroke="#8B5CF6"
-            strokeWidth="3"
-            rx="2"
+            strokeWidth="2"
           />
-          <rect
-            x="22"
-            y="70"
-            width="18"
-            height="4"
+
+          {/* Projector Lens */}
+          <circle
+            cx="22"
+            cy="66"
+            r="3"
             fill="none"
             stroke="#8B5CF6"
-            strokeWidth="3"
-            rx="2"
+            strokeWidth="2"
+          />
+          <circle cx="22" cy="66" r="1.5" fill="#FBBF24" />
+
+          {/* Projection Beam */}
+          <path
+            d="M25 66 L34 40"
+            stroke="#8B5CF6"
+            strokeWidth="1.5"
+            strokeOpacity="0.6"
+            strokeDasharray="2,2"
+          />
+          <path
+            d="M25 66 L34 55"
+            stroke="#8B5CF6"
+            strokeWidth="1.5"
+            strokeOpacity="0.6"
+            strokeDasharray="2,2"
           />
 
           {/* Checklist Items (right side) */}
